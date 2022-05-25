@@ -269,10 +269,13 @@ public class Cellarss extends javax.swing.JInternalFrame {
         String monto = tlCellar.getValueAt(fila, 8).toString();
 
         System.out.println("el codigo es " + idProddu);
-        txtNoSalidaPro.setText(idProddu);
+        //txtNoSalidaPro.setText(idProddu);
 
         String NoSPro = txtAmount.getText();
-        String CantSPro = txtAmount.getText();
+        String CantSPro = txtCantidaSalida.getText();
+        String Afecha = ((JTextField) jDateCellarSalida.getDateEditor().getUiComponent()).getText();
+        System.out.println("el txt CantSPro : " + CantSPro);
+        System.out.println("el txt fecha CantSPro : " + Afecha);
 
         String cellar1 = BoxSalidaCaller.getSelectedItem().toString();
         String[] Raycellar1 = cellar1.split("-");
@@ -282,7 +285,6 @@ public class Cellarss extends javax.swing.JInternalFrame {
         System.out.println("La cantidad es: " + cantidad);
         System.out.println("El precio es : " + monto);
 
-        Double ANCanSali = Double.parseDouble(CantSPro);
         Double ANCantidad = Double.parseDouble(CantSPro);
         Double ACantidad = Double.parseDouble(cantidad);
         Double APrcio = Double.parseDouble(monto);
@@ -290,16 +292,18 @@ public class Cellarss extends javax.swing.JInternalFrame {
         Double ANtotal;
         Double AResCanti;
 
-        AResCanti = ACantidad - ANCanSali;
-        Atotal = ACantidad * APrcio;
+        /*update*/
+        AResCanti = ACantidad - ANCantidad;
+        Atotal = AResCanti * APrcio;
+
+        /*insert */
         ANtotal = ANCantidad * APrcio;
 
+        System.out.println("en el problem : " + ANCantidad);
         System.out.println("La cantidad - es: " + AResCanti);
         System.out.println("La cantidad es: " + ACantidad);
         System.out.println("El precio es : " + APrcio);
         System.out.println("El Total es : " + Atotal);
-
-        String Afecha = ((JTextField) jDateCellarSalida.getDateEditor().getUiComponent()).getText();
 
         String empleado = boxEmployer.getSelectedItem().toString();
         String[] Rayempleado = empleado.split("-");
@@ -308,7 +312,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
         if (AResCanti > -0.00000001) {
 
             try {
-                PreparedStatement actu = conexcion.prepareStatement("UPDATE inventory SET AMOUNT =" + ACantidad + ", PRICE=" + APrcio + ", TOTAL =" + Atotal + " WHERE ID_INVENTORY = " + idInventori + "");
+                PreparedStatement actu = conexcion.prepareStatement("UPDATE inventory SET AMOUNT =" + AResCanti + ", PRICE=" + APrcio + ", TOTAL =" + Atotal + " WHERE ID_INVENTORY = " + idInventori + "");
                 actu.executeUpdate();
                 showTableCellar(0, null);
             } catch (Exception e) {
@@ -331,7 +335,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "error en la sentencia > " );
+            JOptionPane.showMessageDialog(null, "No se cuenta con esa cantida de Producto \n Profabor verifique la cantidad ");
         }
     }
 
@@ -366,11 +370,10 @@ public class Cellarss extends javax.swing.JInternalFrame {
         BoxSalidaCaller = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         txtCantidaSalida = new javax.swing.JTextField();
-        txtNoSalidaPro = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         BoxCellar1 = new javax.swing.JComboBox<>();
@@ -405,7 +408,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
         });
         jPopupMenuInventori.add(jMenuActualizar);
 
-        jMenuBuscar.setText("Buscar Actualisar");
+        jMenuBuscar.setText("Salida de Bodega");
         jMenuBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuBuscarActionPerformed(evt);
@@ -459,15 +462,15 @@ public class Cellarss extends javax.swing.JInternalFrame {
 
         jDateCellarSalida.setDateFormatString("yyyy-MM-dd");
 
-        jLabel1.setText("A Bodega");
-
-        jLabel3.setText("No. Producto");
+        jLabel1.setText("A que Bodega");
 
         jLabel10.setText("Cantidad de Producto");
 
         jLabel11.setText("que desea Trasferi");
 
-        jLabel12.setText("Empleado");
+        jLabel12.setText("Empleado que lo realisa");
+
+        jLabel13.setText("Fecha de Trasferencia");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -478,39 +481,38 @@ public class Cellarss extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addGap(7, 7, 7))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(boxBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(btBuscar)
-                        .addGap(36, 36, 36)
-                        .addComponent(btActualizar)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNoSalidaPro, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtCantidaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCantidaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BoxSalidaCaller, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jDateCellarSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(boxEmployerSAlida, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12)
-                        .addGap(136, 136, 136))))
+                        .addGap(136, 136, 136))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(boxBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btBuscar)
+                                .addGap(114, 114, 114)
+                                .addComponent(btActualizar))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1079, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -523,7 +525,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
                     .addComponent(btActualizar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -531,19 +533,17 @@ public class Cellarss extends javax.swing.JInternalFrame {
                                 .addComponent(boxEmployerSAlida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel12))
                             .addComponent(jDateCellarSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BoxSalidaCaller, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel1)
                                 .addComponent(txtCantidaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtNoSalidaPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3)))
-                        .addGap(15, 15, 15))
+                                .addComponent(BoxSalidaCaller, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel13))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel11)))
+                .addGap(12, 12, 12)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -756,23 +756,18 @@ public class Cellarss extends javax.swing.JInternalFrame {
         String[] Rayempleado = empleado.split("-");
         System.out.println("Numero empleado: " + Rayempleado[0]);
 
-        /*
+        if (jDateCellar.getCalendar() != null) {
+           
+            if (Cantidad.isEmpty() || Prcio.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+            } else {
 
-        Date date = super.getDate();
-        if (date != null)*/
-        if (Cantidad.isEmpty() || Prcio.isEmpty() || Tfecha.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
-        } else {
-            /*
-            if (jDateCellar.isEnabled() ){
-                JOptionPane.showMessageDialog(this, "Campos fecha vacios porfabor llenar registros.");
-            } else {*/
                 try ( Connection conexion = con.get_connection()) {
                     try {
                         PreparedStatement ps = null;
                         String query = ("INSERT INTO inventory(id_cellar,id_transaction,set_product,id_product,amount,price,\n"
-                            + "total,date_admission,id_person)\n"
-                            + "VALUES(" + Raycellar1[0] + "," + RaytipoTransaccion[0] + "," + idss + "," + Rayproductos[0] + "," + DCantidad + "," + DPrcio + "," + Dtotal + ",'" + Date.valueOf(Tfecha) + "'," + Rayempleado[0] + ")");
+                                + "total,date_admission,id_person)\n"
+                                + "VALUES(" + Raycellar1[0] + "," + RaytipoTransaccion[0] + "," + idss + "," + Rayproductos[0] + "," + DCantidad + "," + DPrcio + "," + Dtotal + ",'" + Date.valueOf(Tfecha) + "'," + Rayempleado[0] + ")");
                         ps = conexion.prepareStatement(query);
                         ps.executeUpdate();
 
@@ -789,7 +784,10 @@ public class Cellarss extends javax.swing.JInternalFrame {
                 }
 
             }
-
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Campos fecha vacios porfabor llenar registros.");
+        } 
     }//GEN-LAST:event_btEnBodegaActionPerformed
 
     private void txtAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountActionPerformed
@@ -844,8 +842,8 @@ public class Cellarss extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -872,7 +870,6 @@ public class Cellarss extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtAmount;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCantidaSalida;
-    private javax.swing.JTextField txtNoSalidaPro;
     private javax.swing.JTextField txtPrice;
     // End of variables declaration//GEN-END:variables
 

@@ -196,7 +196,7 @@ public class Systemm extends javax.swing.JFrame {
         });
         jTools.add(btTransactions);
 
-        btTipeContact.setText("Tipo de comtacto persona");
+        btTipeContact.setText("Tipo de comtactos");
         btTipeContact.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btTipeContactActionPerformed(evt);
