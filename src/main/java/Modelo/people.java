@@ -13,6 +13,7 @@ import java.sql.Date;
 public class people {
     
     int Id_person;
+    int Dpi;
     String Name1;
     String Name2;
     String Name3;
@@ -26,7 +27,8 @@ public class people {
         
     }
 
-    public people(String Name1, String Name2, String Name3, String Last_name1, String Last_name2, Date Birthday, String Nit_person) {
+    public people(int Dpi, String Name1, String Name2, String Name3, String Last_name1, String Last_name2, Date Birthday, String Nit_person) {
+        this.Dpi = Dpi;
         this.Name1 = Name1;
         this.Name2 = Name2;
         this.Name3 = Name3;
@@ -35,13 +37,21 @@ public class people {
         this.Birthday = Birthday;
         this.Nit_person = Nit_person;
     }
-    
+
     public int getId_person() {
         return Id_person;
     }
 
     public void setId_person(int Id_person) {
         this.Id_person = Id_person;
+    }
+
+    public int getDpi() {
+        return Dpi;
+    }
+
+    public void setDpi(int Dpi) {
+        this.Dpi = Dpi;
     }
 
     public String getName1() {
@@ -99,6 +109,8 @@ public class people {
     public void setNit_person(String Nit_person) {
         this.Nit_person = Nit_person;
     }
+
+    
     
     
     

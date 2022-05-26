@@ -8,12 +8,12 @@ package Vista;
  *
  * @author mdavi
  */
-public class Bannss extends javax.swing.JInternalFrame {
+public class NewCellar extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form Bannss
+     * Creates new form NewCellar
      */
-    public Bannss() {
+    public NewCellar() {
         initComponents();
     }
 
@@ -25,12 +25,6 @@ public class Bannss extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
-        setTitle("Amonestaciones");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

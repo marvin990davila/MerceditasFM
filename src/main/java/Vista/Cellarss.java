@@ -43,7 +43,6 @@ public class Cellarss extends javax.swing.JInternalFrame {
     public Cellarss() {
         initComponents();
         cargarCellar(BoxCellar1);
-        cargarTransactions(boxTransactions);
         cargarProduct(boxProduct);
         cargarCellar(BoxSalidaCaller);
         cargarPerson(boxEmployer);
@@ -79,7 +78,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
                     + "FROM inventory inv JOIN cellar cl ON inv.ID_CELLAR=cl.ID_CELLA\n"
                     + "JOIN product pr ON inv.ID_PRODUCT=pr.ID_PRODUCT\n"
                     + "JOIN transactions tn ON inv.ID_TRANSACTION=tn.ID_TRANSACTION\n"
-                    + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON";
+                    + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON ORDER BY id_inventory asc";
         } else {
             if (opbuscar == 1 && valor != null) {
                 int intvalor = Integer.parseInt(valor);
@@ -89,7 +88,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
                         + "FROM inventory inv JOIN cellar cl ON inv.ID_CELLAR=cl.ID_CELLA\n"
                         + "JOIN product pr ON inv.ID_PRODUCT=pr.ID_PRODUCT\n"
                         + "JOIN transactions tn ON inv.ID_TRANSACTION=tn.ID_TRANSACTION\n"
-                        + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON where inv.ID_INVENTORY = " + intvalor + "";
+                        + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON where inv.ID_INVENTORY = " + intvalor + " ORDER BY id_inventory asc";
             } else {
 
                 if (opbuscar == 2 && valor != null) {
@@ -99,7 +98,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
                             + "FROM inventory inv JOIN cellar cl ON inv.ID_CELLAR=cl.ID_CELLA\n"
                             + "JOIN product pr ON inv.ID_PRODUCT=pr.ID_PRODUCT\n"
                             + "JOIN transactions tn ON inv.ID_TRANSACTION=tn.ID_TRANSACTION\n"
-                            + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON where cl.NAME_CELLAR = '" + valor + "'";
+                            + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON where cl.NAME_CELLAR = '" + valor + "' ORDER BY id_inventory asc";
                 } else {
 
                     if (opbuscar == 3 && valor != null) {
@@ -109,7 +108,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
                                 + "FROM inventory inv JOIN cellar cl ON inv.ID_CELLAR=cl.ID_CELLA\n"
                                 + "JOIN product pr ON inv.ID_PRODUCT=pr.ID_PRODUCT\n"
                                 + "JOIN transactions tn ON inv.ID_TRANSACTION=tn.ID_TRANSACTION\n"
-                                + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON where tn.NAME_TRANSACTION = '" + valor + "'";
+                                + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON where tn.NAME_TRANSACTION = '" + valor + "' ORDER BY id_inventory asc";
                     } else {
 
                         if (opbuscar == 4 && valor != null) {
@@ -120,7 +119,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
                                     + "FROM inventory inv JOIN cellar cl ON inv.ID_CELLAR=cl.ID_CELLA\n"
                                     + "JOIN product pr ON inv.ID_PRODUCT=pr.ID_PRODUCT\n"
                                     + "JOIN transactions tn ON inv.ID_TRANSACTION=tn.ID_TRANSACTION\n"
-                                    + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON where inv.SET_PRODUCT = " + intvalor + "";
+                                    + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON where inv.SET_PRODUCT = " + intvalor + " ORDER BY id_inventory asc";
                         } else {
                             if (opbuscar == 5 && valor != null) {
 
@@ -129,7 +128,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
                                         + "FROM inventory inv JOIN cellar cl ON inv.ID_CELLAR=cl.ID_CELLA\n"
                                         + "JOIN product pr ON inv.ID_PRODUCT=pr.ID_PRODUCT\n"
                                         + "JOIN transactions tn ON inv.ID_TRANSACTION=tn.ID_TRANSACTION\n"
-                                        + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON where pr.NAME_PRODUCT = '" + valor + "'";
+                                        + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON where pr.NAME_PRODUCT = '" + valor + "' ORDER BY id_inventory asc";
                             } else {
                                 if (opbuscar == 6 && valor != null) {
 
@@ -138,7 +137,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
                                             + "FROM inventory inv JOIN cellar cl ON inv.ID_CELLAR=cl.ID_CELLA\n"
                                             + "JOIN product pr ON inv.ID_PRODUCT=pr.ID_PRODUCT\n"
                                             + "JOIN transactions tn ON inv.ID_TRANSACTION=tn.ID_TRANSACTION\n"
-                                            + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON where inv.DATE_ADMISSION = '" + valor + "'";
+                                            + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON where inv.DATE_ADMISSION = '" + valor + "' ORDER BY id_inventory asc";
                                 } else {
                                     if (opbuscar == 7 && valor != null) {
 
@@ -147,7 +146,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
                                                 + "FROM inventory inv JOIN cellar cl ON inv.ID_CELLAR=cl.ID_CELLA\n"
                                                 + "JOIN product pr ON inv.ID_PRODUCT=pr.ID_PRODUCT\n"
                                                 + "JOIN transactions tn ON inv.ID_TRANSACTION=tn.ID_TRANSACTION\n"
-                                                + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON where pe.NAME1 = '" + valor + "'";
+                                                + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON where pe.NAME1 = '" + valor + "' ORDER BY id_inventory asc";
                                     } else {
                                         if (opbuscar == 8 && valor != null) {
 
@@ -156,7 +155,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
                                                     + "FROM inventory inv JOIN cellar cl ON inv.ID_CELLAR=cl.ID_CELLA\n"
                                                     + "JOIN product pr ON inv.ID_PRODUCT=pr.ID_PRODUCT\n"
                                                     + "JOIN transactions tn ON inv.ID_TRANSACTION=tn.ID_TRANSACTION\n"
-                                                    + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON where pe.NAME1 = '" + valor + "'";
+                                                    + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON where pe.NAME1 = '" + valor + "' ORDER BY id_inventory asc";
                                         } else {
 
                                             codsql = "SELECT inv.ID_INVENTORY,inv.ID_CELLAR AS No,cl.NAME_CELLAR,tn.NAME_TRANSACTION,inv.SET_PRODUCT,inv.ID_PRODUCT AS No,pr.NAME_PRODUCT,inv.AMOUNT,inv.PRICE,inv.TOTAL\n"
@@ -164,7 +163,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
                                                     + "FROM inventory inv JOIN cellar cl ON inv.ID_CELLAR=cl.ID_CELLA\n"
                                                     + "JOIN product pr ON inv.ID_PRODUCT=pr.ID_PRODUCT\n"
                                                     + "JOIN transactions tn ON inv.ID_TRANSACTION=tn.ID_TRANSACTION\n"
-                                                    + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON";
+                                                    + "JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON ORDER BY id_inventory asc";
                                         }
                                     }
                                 }
@@ -263,6 +262,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
         System.out.println("fila " + fila);
         int idInventori = Integer.parseInt(this.tlCellar.getValueAt(fila, 0).toString());
         System.out.println("Idnu " + idInventori);
+        String idBode = tlCellar.getValueAt(fila, 1).toString();
         String NoProdu = tlCellar.getValueAt(fila, 4).toString();
         String idProddu = tlCellar.getValueAt(fila, 5).toString();
         String cantidad = tlCellar.getValueAt(fila, 7).toString();
@@ -271,7 +271,6 @@ public class Cellarss extends javax.swing.JInternalFrame {
         System.out.println("el codigo es " + idProddu);
         //txtNoSalidaPro.setText(idProddu);
 
-        String NoSPro = txtAmount.getText();
         String CantSPro = txtCantidaSalida.getText();
         String Afecha = ((JTextField) jDateCellarSalida.getDateEditor().getUiComponent()).getText();
         System.out.println("el txt CantSPro : " + CantSPro);
@@ -285,57 +284,102 @@ public class Cellarss extends javax.swing.JInternalFrame {
         System.out.println("La cantidad es: " + cantidad);
         System.out.println("El precio es : " + monto);
 
-        Double ANCantidad = Double.parseDouble(CantSPro);
+        /* Double ANCantidad = Double.parseDouble(CantSPro);
         Double ACantidad = Double.parseDouble(cantidad);
         Double APrcio = Double.parseDouble(monto);
         Double Atotal;
         Double ANtotal;
-        Double AResCanti;
+        Double AResCanti;*/
 
-        /*update*/
-        AResCanti = ACantidad - ANCantidad;
+ /*update*/
+ /* AResCanti = ACantidad - ANCantidad;
         Atotal = AResCanti * APrcio;
 
         /*insert */
-        ANtotal = ANCantidad * APrcio;
+ /* ANtotal = ANCantidad * APrcio;
 
         System.out.println("en el problem : " + ANCantidad);
         System.out.println("La cantidad - es: " + AResCanti);
         System.out.println("La cantidad es: " + ACantidad);
         System.out.println("El precio es : " + APrcio);
-        System.out.println("El Total es : " + Atotal);
-
+        System.out.println("El Total es : " + Atotal);*/
         String empleado = boxEmployer.getSelectedItem().toString();
         String[] Rayempleado = empleado.split("-");
         System.out.println("Numero empleado: " + Rayempleado[0]);
 
-        if (AResCanti > -0.00000001) {
+        if (jDateCellarSalida.getCalendar() != null) {
 
-            try {
-                PreparedStatement actu = conexcion.prepareStatement("UPDATE inventory SET AMOUNT =" + AResCanti + ", PRICE=" + APrcio + ", TOTAL =" + Atotal + " WHERE ID_INVENTORY = " + idInventori + "");
-                actu.executeUpdate();
-                showTableCellar(0, null);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "error" + e.toString());
-                System.out.println(e);
-                e.printStackTrace();
-                System.out.println(e.getMessage());
-            }
-            try {
-                PreparedStatement actu = conexcion.prepareStatement("INSERT INTO inventory(id_cellar,id_transaction,set_product,id_product,amount,price,\n"
-                        + "total,date_admission,id_person)\n"
-                        + "VALUES(" + Raycellar1[0] + ",2," + NoProdu + "," + idProddu + "," + ANCantidad + "," + APrcio + "," + ANtotal + ",'" + Date.valueOf(Afecha) + "'," + Rayempleado[0] + ")");
-                actu.executeUpdate();
-                showTableCellar(0, null);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "error" + e.toString());
-                System.out.println(e);
-                e.printStackTrace();
-                System.out.println(e.getMessage());
+            if (CantSPro.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+            } else {
+
+                Double ANCantidad = Double.parseDouble(CantSPro);
+                Double ACantidad = Double.parseDouble(cantidad);
+                Double APrcio = Double.parseDouble(monto);
+                Double Atotal;
+                Double ANtotal;
+                Double AResCanti;
+
+                /*update*/
+                AResCanti = ACantidad - ANCantidad;
+                Atotal = AResCanti * APrcio;
+
+                /*insert */
+                ANtotal = ANCantidad * APrcio;
+
+                System.out.println("en el problem : " + ANCantidad);
+                System.out.println("La cantidad - es: " + AResCanti);
+                System.out.println("La cantidad es: " + ACantidad);
+                System.out.println("El precio es : " + APrcio);
+                System.out.println("El Total es : " + Atotal);
+
+                if (AResCanti > -0.00000001) {
+
+                    System.out.println("campo : " + idBode);
+                    System.out.println("combobox : " + Raycellar1[0]);
+
+                    if (Raycellar1[0] == idBode) {
+                        
+                        System.out.println("campo : " + idBode);
+                        System.out.println("combobox : " + Raycellar1[0]);
+
+                        JOptionPane.showMessageDialog(null, "Erro Aselecionado la bodega de origen \n por fabor selecione otra bodega \n de salida ");
+
+                    } else {
+
+                        try {
+                            PreparedStatement actu = conexcion.prepareStatement("UPDATE inventory SET AMOUNT =" + AResCanti + ", PRICE=" + APrcio + ", TOTAL =" + Atotal + " WHERE ID_INVENTORY = " + idInventori + "");
+                            actu.executeUpdate();
+                            showTableCellar(0, null);
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, "error" + e.toString());
+                            System.out.println(e);
+                            e.printStackTrace();
+                            System.out.println(e.getMessage());
+                        }
+                        try {
+                            PreparedStatement actu = conexcion.prepareStatement("INSERT INTO inventory(id_cellar,id_transaction,set_product,id_product,amount,price,\n"
+                                    + "total,date_admission,id_person)\n"
+                                    + "VALUES(" + Raycellar1[0] + ",2," + NoProdu + "," + idProddu + "," + ANCantidad + "," + APrcio + "," + ANtotal + ",'" + Date.valueOf(Afecha) + "'," + Rayempleado[0] + ")");
+                            actu.executeUpdate();
+                            txtCantidaSalida.setText("");
+                            showTableCellar(0, null);
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, "error" + e.toString());
+                            System.out.println(e);
+                            e.printStackTrace();
+
+                            System.out.println(e.getMessage());
+                        }
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se cuenta con esa cantida de Producto \n Profabor verifique la cantidad ");
+                }
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "No se cuenta con esa cantida de Producto \n Profabor verifique la cantidad ");
+            JOptionPane.showMessageDialog(this, "Campos fecha vacios porfabor llenar registros.");
         }
     }
 
@@ -353,7 +397,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
         jCalendar3 = new com.toedter.calendar.JCalendar();
         jPopupMenuInventori = new javax.swing.JPopupMenu();
         jMenuActualizar = new javax.swing.JMenuItem();
-        jMenuBuscar = new javax.swing.JMenuItem();
+        jMenuSalidaBodega = new javax.swing.JMenuItem();
         jTabbedCellar = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -384,8 +428,6 @@ public class Cellarss extends javax.swing.JInternalFrame {
         txtAmount = new javax.swing.JTextField();
         txtPrice = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        boxTransactions = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         boxEmployer = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
@@ -408,13 +450,13 @@ public class Cellarss extends javax.swing.JInternalFrame {
         });
         jPopupMenuInventori.add(jMenuActualizar);
 
-        jMenuBuscar.setText("Salida de Bodega");
-        jMenuBuscar.addActionListener(new java.awt.event.ActionListener() {
+        jMenuSalidaBodega.setText("Salida de Bodega");
+        jMenuSalidaBodega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuBuscarActionPerformed(evt);
+                jMenuSalidaBodegaActionPerformed(evt);
             }
         });
-        jPopupMenuInventori.add(jMenuBuscar);
+        jPopupMenuInventori.add(jMenuSalidaBodega);
 
         setClosable(true);
         setIconifiable(true);
@@ -587,10 +629,6 @@ public class Cellarss extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Fecha");
 
-        jLabel8.setText("Tipo de transacción");
-
-        boxTransactions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel9.setText("Precio");
 
         boxEmployer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -624,11 +662,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(BoxCellar1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel8)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(boxTransactions, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(BoxCellar1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(15, 15, 15)
                                         .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -644,7 +678,8 @@ public class Cellarss extends javax.swing.JInternalFrame {
                                 .addGap(26, 26, 26)
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(86, 86, 86))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(jLabel6)
@@ -660,9 +695,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BoxCellar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel8)
-                    .addComponent(boxTransactions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2))
                 .addGap(34, 34, 34)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -712,9 +745,9 @@ public class Cellarss extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jMenuActualizarActionPerformed
 
-    private void jMenuBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBuscarActionPerformed
+    private void jMenuSalidaBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalidaBodegaActionPerformed
         SalidasBodega();
-    }//GEN-LAST:event_jMenuBuscarActionPerformed
+    }//GEN-LAST:event_jMenuSalidaBodegaActionPerformed
 
     private void btEnBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnBodegaActionPerformed
         // TODO add your handling code here:
@@ -729,7 +762,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
         String Cantidad = txtAmount.getText();
         String Prcio = txtPrice.getText();
         String Tfecha = ((JTextField) jDateCellar.getDateEditor().getUiComponent()).getText();
-        String tipoTransaccion = boxTransactions.getSelectedItem().toString();
+        
         String empleado = boxEmployer.getSelectedItem().toString();
 
         String[] Raycellar1 = cellar1.split("-");
@@ -740,36 +773,44 @@ public class Cellarss extends javax.swing.JInternalFrame {
 
         System.out.println("fecha   " + Tfecha);
 
-        Double DCantidad = Double.parseDouble(Cantidad);
+        /*Double DCantidad = Double.parseDouble(Cantidad);
         Double DPrcio = Double.parseDouble(Prcio);
         Double Dtotal;
 
-        Dtotal = DCantidad * DPrcio;
-
-        System.out.println("La cantidad es: " + DCantidad);
-        System.out.println("El precio es : " + DPrcio);
-        System.out.println("El Total es : " + Dtotal);
-
-        String[] RaytipoTransaccion = tipoTransaccion.split("-");
-        System.out.println("Numero tipoTransaccion: " + RaytipoTransaccion[0]);
+        Dtotal = DCantidad * DPrcio;*/
+        
 
         String[] Rayempleado = empleado.split("-");
         System.out.println("Numero empleado: " + Rayempleado[0]);
 
         if (jDateCellar.getCalendar() != null) {
-           
+
             if (Cantidad.isEmpty() || Prcio.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
             } else {
 
                 try ( Connection conexion = con.get_connection()) {
                     try {
+
+                        Double DCantidad = Double.parseDouble(Cantidad);
+                        Double DPrcio = Double.parseDouble(Prcio);
+                        Double Dtotal;
+
+                        Dtotal = DCantidad * DPrcio;
+
+                        System.out.println("La cantidad es: " + DCantidad);
+                        System.out.println("El precio es : " + DPrcio);
+                        System.out.println("El Total es : " + Dtotal);
+
                         PreparedStatement ps = null;
                         String query = ("INSERT INTO inventory(id_cellar,id_transaction,set_product,id_product,amount,price,\n"
                                 + "total,date_admission,id_person)\n"
-                                + "VALUES(" + Raycellar1[0] + "," + RaytipoTransaccion[0] + "," + idss + "," + Rayproductos[0] + "," + DCantidad + "," + DPrcio + "," + Dtotal + ",'" + Date.valueOf(Tfecha) + "'," + Rayempleado[0] + ")");
+                                + "VALUES(" + Raycellar1[0] + ",1," + idss + "," + Rayproductos[0] + "," + DCantidad + "," + DPrcio + "," + Dtotal + ",'" + Date.valueOf(Tfecha) + "'," + Rayempleado[0] + ")");
                         ps = conexion.prepareStatement(query);
                         ps.executeUpdate();
+
+                        txtAmount.setText("");
+                        txtPrice.setText("");
 
                         showTableCellar(0, null);
 
@@ -784,10 +825,10 @@ public class Cellarss extends javax.swing.JInternalFrame {
                 }
 
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(this, "Campos fecha vacios porfabor llenar registros.");
-        } 
+        }
     }//GEN-LAST:event_btEnBodegaActionPerformed
 
     private void txtAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountActionPerformed
@@ -827,7 +868,6 @@ public class Cellarss extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> boxEmployer;
     private javax.swing.JComboBox<String> boxEmployerSAlida;
     private javax.swing.JComboBox<String> boxProduct;
-    private javax.swing.JComboBox<String> boxTransactions;
     private javax.swing.JButton btActualizar;
     private javax.swing.JButton btBuscar;
     private javax.swing.JButton btEnBodega;
@@ -848,10 +888,9 @@ public class Cellarss extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuActualizar;
-    private javax.swing.JMenuItem jMenuBuscar;
+    private javax.swing.JMenuItem jMenuSalidaBodega;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -921,29 +960,7 @@ public class Cellarss extends javax.swing.JInternalFrame {
         }
     }
 
-    private void cargarTransactions(JComboBox t) {
-        DefaultComboBoxModel combo = new DefaultComboBoxModel();
-        t.setModel(combo);
-        CTTransaction ctc = new CTTransaction();
-
-        try {
-            Statement st = conexcion.createStatement();
-            ResultSet rr = st.executeQuery("SELECT * FROM transactions");
-
-            while (rr.next()) {
-                transactions con = new transactions();
-                System.out.println(rr.getString(1));
-                con.setId_transaction(rr.getInt(1));
-                con.setName_transaction(rr.getString(2));
-                ctc.AgregarTransactions(con);
-                combo.addElement(con.getId_transaction() + " - " + con.getName_transaction());
-                System.out.println("Exito....");
-            }
-
-        } catch (Exception e) {
-            System.out.println("Error , no se puede mostrar combo" + e);
-        }
-    }
+    
 
     private void cargarPerson(JComboBox pp) {
         DefaultComboBoxModel combo = new DefaultComboBoxModel();
@@ -958,10 +975,10 @@ public class Cellarss extends javax.swing.JInternalFrame {
                 people con = new people();
                 System.out.println(rr.getString(1));
                 con.setId_person(rr.getInt(1));
-                con.setName1(rr.getString(2));
-                con.setName2(rr.getString(3));
-                con.setLast_name1(rr.getString(5));
-                con.setLast_name2(rr.getString(6));
+                con.setName1(rr.getString(3));
+                con.setName2(rr.getString(4));
+                con.setLast_name1(rr.getString(6));
+                con.setLast_name2(rr.getString(7));
                 ctc.AgregarPeople(con);
                 combo.addElement(con.getId_person() + " - " + con.getName1() + " " + con.getName2() + " " + con.getLast_name1() + " " + con.getLast_name2());
                 System.out.println("Exito....");

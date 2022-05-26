@@ -56,13 +56,12 @@ public class Systemm extends javax.swing.JFrame {
         btEmployees = new javax.swing.JMenuItem();
         btNewUser = new javax.swing.JMenuItem();
         btTrainings = new javax.swing.JMenuItem();
-        btBanns = new javax.swing.JMenuItem();
         jProduct = new javax.swing.JMenu();
         btcellar = new javax.swing.JMenuItem();
         btProducts = new javax.swing.JMenuItem();
         jTools = new javax.swing.JMenu();
         btMeasures = new javax.swing.JMenuItem();
-        btTransactions = new javax.swing.JMenuItem();
+        btNewCellar = new javax.swing.JMenuItem();
         btTipeContact = new javax.swing.JMenuItem();
 
         menu1.setLabel("File");
@@ -148,14 +147,6 @@ public class Systemm extends javax.swing.JFrame {
         });
         jPerson.add(btTrainings);
 
-        btBanns.setText("Amonestaciones");
-        btBanns.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBannsActionPerformed(evt);
-            }
-        });
-        jPerson.add(btBanns);
-
         jMenuBar1.add(jPerson);
 
         jProduct.setText("Productos");
@@ -188,13 +179,8 @@ public class Systemm extends javax.swing.JFrame {
         });
         jTools.add(btMeasures);
 
-        btTransactions.setText("Tipos de transacciones");
-        btTransactions.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTransactionsActionPerformed(evt);
-            }
-        });
-        jTools.add(btTransactions);
+        btNewCellar.setText("Nueva Bodegas");
+        jTools.add(btNewCellar);
 
         btTipeContact.setText("Tipo de comtactos");
         btTipeContact.addActionListener(new java.awt.event.ActionListener() {
@@ -259,13 +245,6 @@ public class Systemm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btMeasuresActionPerformed
 
-    private void btTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTransactionsActionPerformed
-        // TODO add your handling code here:
-        Transactionss windowTransactionss = new Transactionss();
-        Desk.add(windowTransactionss);
-        windowTransactionss.show();
-    }//GEN-LAST:event_btTransactionsActionPerformed
-
     private void btCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCustomersActionPerformed
         // TODO add your handling code here:
         Customerss windowCustomerss = new Customerss();
@@ -296,17 +275,8 @@ public class Systemm extends javax.swing.JFrame {
 
     private void btTrainingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTrainingsActionPerformed
         // TODO add your handling code here:
-        Trainingss windowTrainingss = new Trainingss();
-        Desk.add(windowTrainingss);
-        windowTrainingss.show();
+        
     }//GEN-LAST:event_btTrainingsActionPerformed
-
-    private void btBannsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBannsActionPerformed
-        // TODO add your handling code here:
-        Bannss windowBannss = new Bannss();
-        Desk.add(windowBannss);
-        windowBannss.show();
-    }//GEN-LAST:event_btBannsActionPerformed
 
     private void btTipeContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTipeContactActionPerformed
         // TODO add your handling code here:
@@ -353,17 +323,16 @@ public class Systemm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane Desk;
-    private javax.swing.JMenuItem btBanns;
     private javax.swing.JMenuItem btBusiness;
     private javax.swing.JMenuItem btCustomers;
     private javax.swing.JMenuItem btEmployees;
     private javax.swing.JMenuItem btMeasures;
+    private javax.swing.JMenuItem btNewCellar;
     private javax.swing.JMenuItem btNewUser;
     private javax.swing.JMenuItem btProducts;
     private javax.swing.JMenuItem btProviders;
     private javax.swing.JMenuItem btTipeContact;
     private javax.swing.JMenuItem btTrainings;
-    private javax.swing.JMenuItem btTransactions;
     private javax.swing.JMenuItem btcellar;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
