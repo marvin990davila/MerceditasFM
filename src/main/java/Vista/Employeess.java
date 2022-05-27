@@ -161,20 +161,20 @@ public class Employeess extends javax.swing.JInternalFrame {
         int idPe = Integer.parseInt(this.tlEmpleados.getValueAt(fila, 0).toString());
 
         /**/
-        
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Id");
-        model.addColumn("DPI");
+        model.addColumn("Typo de Contacto");
+        model.addColumn("Info");
 
         tlContactEmploy.setModel(model);
 
-        String[] datos = new String[2];
+        String[] datos = new String[3];
         try {
 
             Statement leer = conexcion.createStatement();
-            ResultSet rs = leer.executeQuery("SELECT  ty.name_type_contact, co.text_contact\n"
+            ResultSet rs = leer.executeQuery("SELECT pe.ID_PERSON,ty.name_type_contact, co.text_contact\n"
                     + "FROM  type_contact ty JOIN contact co ON ty.id_type_contact=co.id_type_contact\n"
-                    + "JOIN people pe ON co.ID_PERSON=pe.ID_PERSON WHERE pe.ID_PERSON = "+idPe+" ");
+                    + "JOIN people pe ON co.ID_PERSON=pe.ID_PERSON WHERE pe.ID_PERSON = " + idPe + " ");
 
             while (rs.next()) {
 
@@ -182,6 +182,7 @@ public class Employeess extends javax.swing.JInternalFrame {
                 System.out.println(rs.getString(2));
                 datos[0] = rs.getString(1);
                 datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
 
                 model.addRow(datos);
 
@@ -193,8 +194,98 @@ public class Employeess extends javax.swing.JInternalFrame {
         }
 
     }
-    
-    
+
+    public void actualizarContacto() {
+        int fila = tlContactEmploy.getSelectedRow();
+        System.out.println(fila);
+        int idPerson = Integer.parseInt(this.tlContactEmploy.getValueAt(fila, 0).toString());
+        String texContac = tlContactEmploy.getValueAt(fila, 2).toString();
+
+        if (texContac.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+        } else {
+
+            try {
+                PreparedStatement actu = conexcion.prepareStatement("UPDATE contact SET text_contact =" + texContac + " WHERE ID_person = " + idPerson + "");
+                actu.executeUpdate();
+                mostrarInforContacto();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "error" + e.toString());
+            }
+
+        }
+    }
+
+    public void EstatusPersonContratado() {
+
+        int fila = tlEmpleados.getSelectedRow();
+        System.out.println(fila);
+        int idPersom = Integer.parseInt(this.tlEmpleados.getValueAt(fila, 0).toString());
+        String Status = tlEmpleados.getValueAt(fila, 10).toString();
+        String cont = "Contratado" ;
+        
+        System.out.println(Status);
+        
+        if (Status.equals(cont)) {
+            JOptionPane.showMessageDialog(null, "Esta persona ya se encuentra Contratada");
+        } else {
+            try {
+                PreparedStatement actu = conexcion.prepareStatement("UPDATE person_classification SET ID_STATUS = 1 WHERE ID_person =  " + idPersom + "");
+                actu.executeUpdate();
+                showTableProduct();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "error" + e.toString());
+            }
+        }
+    }
+
+    public void EstatusPersonSuspendido() {
+
+        int fila = tlEmpleados.getSelectedRow();
+        System.out.println(fila);
+        int idPersom = Integer.parseInt(this.tlEmpleados.getValueAt(fila, 0).toString());
+        String Status = tlEmpleados.getValueAt(fila, 10).toString();
+        String cont = "Suspendido" ;
+        
+        System.out.println(Status);
+        
+        if (Status.equals(cont)) {
+            JOptionPane.showMessageDialog(null, "Esta persona ya se encuentra Suspendido");
+        } else {
+            try {
+                PreparedStatement actu = conexcion.prepareStatement("UPDATE person_classification SET ID_STATUS = 2 WHERE ID_person =  " + idPersom + "");
+                actu.executeUpdate();
+                showTableProduct();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "error" + e.toString());
+            }
+        }
+
+    }
+
+    public void EstatusPersonDespedido() {
+
+        int fila = tlEmpleados.getSelectedRow();
+        System.out.println(fila);
+        int idPersom = Integer.parseInt(this.tlEmpleados.getValueAt(fila, 0).toString());
+        String Status = tlEmpleados.getValueAt(fila, 10).toString();
+        String cont = "Despedido" ;
+        
+        System.out.println(Status);
+        
+        if (Status.equals(cont)) {
+            JOptionPane.showMessageDialog(null, "Esta persona ya se encuentra Despedido");
+        } else {
+            try {
+                PreparedStatement actu = conexcion.prepareStatement("UPDATE person_classification SET ID_STATUS = 3 WHERE ID_person =  " + idPersom + "");
+                actu.executeUpdate();
+                showTableProduct();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "error" + e.toString());
+            }
+        }
+
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -204,8 +295,11 @@ public class Employeess extends javax.swing.JInternalFrame {
         jMenuActuEmpleado = new javax.swing.JMenuItem();
         jMenuGuardar = new javax.swing.JMenuItem();
         jMenuMostrar = new javax.swing.JMenuItem();
+        jMenuContratado = new javax.swing.JMenuItem();
+        jMenuSuspendido = new javax.swing.JMenuItem();
+        jMenuDespedido = new javax.swing.JMenuItem();
         jPopupMenu2 = new javax.swing.JPopupMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuActualisarContact = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JSeparator();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -267,8 +361,37 @@ public class Employeess extends javax.swing.JInternalFrame {
         });
         jPopupMenu1.add(jMenuMostrar);
 
-        jMenuItem1.setText("jMenuItem1");
-        jPopupMenu2.add(jMenuItem1);
+        jMenuContratado.setText("Contratar Persona");
+        jMenuContratado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuContratadoActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuContratado);
+
+        jMenuSuspendido.setText("Suspender Persona");
+        jMenuSuspendido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSuspendidoActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuSuspendido);
+
+        jMenuDespedido.setText("Despedir Persona");
+        jMenuDespedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuDespedidoActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuDespedido);
+
+        jMenuActualisarContact.setText("Actualisar Contacto");
+        jMenuActualisarContact.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuActualisarContactActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(jMenuActualisarContact);
 
         setClosable(true);
         setIconifiable(true);
@@ -278,10 +401,10 @@ public class Employeess extends javax.swing.JInternalFrame {
 
         tlEmpleados.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tlEmpleados.setComponentPopupMenu(jPopupMenu1);
-        tlEmpleados.setFocusCycleRoot(true);
         jScrollPane1.setViewportView(tlEmpleados);
 
         tlContactEmploy.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tlContactEmploy.setComponentPopupMenu(jPopupMenu2);
         tlContactEmploy.setFocusCycleRoot(true);
         jScrollPane2.setViewportView(tlContactEmploy);
 
@@ -599,6 +722,26 @@ public class Employeess extends javax.swing.JInternalFrame {
         mostrarInforContacto();
     }//GEN-LAST:event_jMenuMostrarActionPerformed
 
+    private void jMenuActualisarContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuActualisarContactActionPerformed
+        // TODO add your handling code here:
+        actualizarContacto();
+    }//GEN-LAST:event_jMenuActualisarContactActionPerformed
+
+    private void jMenuContratadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuContratadoActionPerformed
+        // TODO add your handling code here:
+        EstatusPersonContratado();
+    }//GEN-LAST:event_jMenuContratadoActionPerformed
+
+    private void jMenuSuspendidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSuspendidoActionPerformed
+        // TODO add your handling code here:
+        EstatusPersonSuspendido();
+    }//GEN-LAST:event_jMenuSuspendidoActionPerformed
+
+    private void jMenuDespedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDespedidoActionPerformed
+        // TODO add your handling code here:
+        EstatusPersonDespedido();
+    }//GEN-LAST:event_jMenuDespedidoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxTypeContact;
@@ -619,9 +762,12 @@ public class Employeess extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenuItem jMenuActuEmpleado;
+    private javax.swing.JMenuItem jMenuActualisarContact;
+    private javax.swing.JMenuItem jMenuContratado;
+    private javax.swing.JMenuItem jMenuDespedido;
     private javax.swing.JMenuItem jMenuGuardar;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuMostrar;
+    private javax.swing.JMenuItem jMenuSuspendido;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;

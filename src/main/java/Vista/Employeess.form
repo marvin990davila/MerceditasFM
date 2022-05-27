@@ -32,6 +32,30 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuMostrarActionPerformed"/>
           </Events>
         </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="jMenuContratado">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Contratar Persona"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuContratadoActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="jMenuSuspendido">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Suspender Persona"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuSuspendidoActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="jMenuDespedido">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Despedir Persona"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuDespedidoActionPerformed"/>
+          </Events>
+        </MenuItem>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPopupMenu" name="jPopupMenu2">
@@ -40,10 +64,13 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
       <SubComponents>
-        <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+        <MenuItem class="javax.swing.JMenuItem" name="jMenuActualisarContact">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+            <Property name="text" type="java.lang.String" value="Actualisar Contacto"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuActualisarContactActionPerformed"/>
+          </Events>
         </MenuItem>
       </SubComponents>
     </Container>
@@ -183,7 +210,6 @@
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="jPopupMenu1"/>
                         </Property>
-                        <Property name="focusCycleRoot" type="boolean" value="true"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -198,6 +224,9 @@
                     <Component class="javax.swing.JTable" name="tlContactEmploy">
                       <Properties>
                         <Property name="autoResizeMode" type="int" value="0"/>
+                        <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="jPopupMenu2"/>
+                        </Property>
                         <Property name="focusCycleRoot" type="boolean" value="true"/>
                       </Properties>
                     </Component>

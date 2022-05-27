@@ -90,11 +90,11 @@ public class Systemm extends javax.swing.JFrame {
         Desk.setLayout(DeskLayout);
         DeskLayout.setHorizontalGroup(
             DeskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1185, Short.MAX_VALUE)
+            .addGap(0, 1232, Short.MAX_VALUE)
         );
         DeskLayout.setVerticalGroup(
             DeskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGap(0, 612, Short.MAX_VALUE)
         );
 
         jPerson.setText("Personas");
@@ -198,13 +198,13 @@ public class Systemm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Desk, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1185, Short.MAX_VALUE)
+            .addComponent(Desk, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1232, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Desk, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE))
+                .addComponent(Desk, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE))
         );
 
         pack();
@@ -247,7 +247,7 @@ public class Systemm extends javax.swing.JFrame {
 
     private void btCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCustomersActionPerformed
         // TODO add your handling code here:
-        Customerss windowCustomerss = new Customerss();
+        Customerrs windowCustomerss = new Customerrs();
         Desk.add(windowCustomerss);
         windowCustomerss.show();
     }//GEN-LAST:event_btCustomersActionPerformed

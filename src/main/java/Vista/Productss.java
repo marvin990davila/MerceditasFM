@@ -156,7 +156,7 @@ public class Productss extends javax.swing.JInternalFrame {
 
         jScrollPane3.setViewportView(txtNameProduct);
 
-        btGuardarProduct.setText("Guardar");
+        btGuardarProduct.setText("Guardar Producto");
         btGuardarProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btGuardarProductActionPerformed(evt);
@@ -202,7 +202,7 @@ public class Productss extends javax.swing.JInternalFrame {
                         .addComponent(boxMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
                         .addComponent(btGuardarProduct)))
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
             .addComponent(jSeparator1)
             .addComponent(jSeparator2)
         );
