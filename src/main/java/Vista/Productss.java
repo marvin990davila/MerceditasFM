@@ -280,6 +280,8 @@ public class Productss extends javax.swing.JInternalFrame {
                     String query = ("INSERT INTO product(name_product,id_measure)VALUES('" + nameMeasure + "'," + RayMedida[0] + ")");
                     ps = conexion.prepareStatement(query);
                     ps.executeUpdate();
+                    showTableProduct();
+                    txtNameProduct.setText("");
 
                     JOptionPane.showMessageDialog(this, "Guardado.");
                 } catch (Exception e) {

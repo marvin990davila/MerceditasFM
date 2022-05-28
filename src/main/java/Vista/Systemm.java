@@ -180,6 +180,11 @@ public class Systemm extends javax.swing.JFrame {
         jTools.add(btMeasures);
 
         btNewCellar.setText("Nueva Bodegas");
+        btNewCellar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNewCellarActionPerformed(evt);
+            }
+        });
         jTools.add(btNewCellar);
 
         btTipeContact.setText("Tipo de comtactos");
@@ -275,7 +280,9 @@ public class Systemm extends javax.swing.JFrame {
 
     private void btTrainingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTrainingsActionPerformed
         // TODO add your handling code here:
-        
+        Trainings windowTrainings = new Trainings();
+        Desk.add(windowTrainings);
+        windowTrainings.show();
     }//GEN-LAST:event_btTrainingsActionPerformed
 
     private void btTipeContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTipeContactActionPerformed
@@ -285,6 +292,13 @@ public class Systemm extends javax.swing.JFrame {
         windowTipeContact.show();
         
     }//GEN-LAST:event_btTipeContactActionPerformed
+
+    private void btNewCellarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewCellarActionPerformed
+        // TODO add your handling code here:
+         NewCellar windowNewCellar = new NewCellar();
+        Desk.add(windowNewCellar);
+        windowNewCellar.show();
+    }//GEN-LAST:event_btNewCellarActionPerformed
 
     /**
      * @param args the command line arguments
