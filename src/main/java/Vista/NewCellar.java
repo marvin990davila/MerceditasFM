@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author mdavi
  */
 public class NewCellar extends javax.swing.JInternalFrame {
-    
+
     conexcion con = new conexcion();
     Connection conexcion = con.get_connection();
 
@@ -27,7 +27,7 @@ public class NewCellar extends javax.swing.JInternalFrame {
         showTableCellar();
     }
 
-  public void showTableCellar() {
+    public void showTableCellar() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Id Product");
         model.addColumn("Bodega");
@@ -63,20 +63,22 @@ public class NewCellar extends javax.swing.JInternalFrame {
         int idCellar = Integer.parseInt(this.tlNCellar.getValueAt(fila, 0).toString());
         String namePro = tlNCellar.getValueAt(fila, 1).toString();
 
-
         System.out.println("La cantidad es: " + namePro);
 
+        if (namePro.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
+        } else {
+            try {
+                PreparedStatement actu = conexcion.prepareStatement("UPDATE cellar SET NAME_cellar ='" + namePro + "' WHERE ID_cella = " + idCellar + "");
+                actu.executeUpdate();
+                showTableCellar();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "error" + e.toString());
 
-        try {
-            PreparedStatement actu = conexcion.prepareStatement("UPDATE cellar SET NAME_cellar ='" + namePro + "' WHERE ID_cella = " + idCellar + "");
-            actu.executeUpdate();
-            showTableCellar();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "error" + e.toString());
-
+            }
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -126,12 +128,12 @@ public class NewCellar extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(btCellar)
-                    .addComponent(txtNewCellar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtNewCellar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,23 +152,21 @@ public class NewCellar extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab1", jPanel1);
+        jTabbedPane1.addTab("Bodegas", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,11 +189,11 @@ public class NewCellar extends javax.swing.JInternalFrame {
 
     private void btCellarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCellarActionPerformed
         // TODO add your handling code here:
-        
+
         String nameCellar = txtNewCellar.getText();
-        
+
         if (nameCellar.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
         } else {
             try ( Connection conexion = con.get_connection()) {
                 try {
@@ -207,14 +207,14 @@ public class NewCellar extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Guardado.");
                 } catch (Exception e) {
                     System.err.print(e.toString());
-                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                 }
             } catch (SQLException e) {
                 System.err.print(e.toString());
                 JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado.\nFavor comunicarse con el administrador.");
             }
         }
-        
+
     }//GEN-LAST:event_btCellarActionPerformed
 
 

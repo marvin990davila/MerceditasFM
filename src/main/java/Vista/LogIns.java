@@ -119,7 +119,7 @@ public class LogIns extends javax.swing.JFrame {
                         pg.setVisible(true);
                         
                     } else {    
-                        JOptionPane.showMessageDialog(null, "Usuario77 o contraseña incorrectas");
+                        JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectas");
                     }
 
                 } else {

@@ -12,14 +12,18 @@ package com.mycompany.meceditas;
 import Vista.LogIns;
 
 
+
 public class Meceditas {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
         
+        
+        
+        /**/
      new LogIns().show();
      
-     
+
      
     }
     

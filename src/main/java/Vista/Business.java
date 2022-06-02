@@ -76,7 +76,7 @@ public class Business extends javax.swing.JInternalFrame {
         String Nnit = tlCompany.getValueAt(fila, 2).toString();
 
         if (NaBos.isEmpty() || Nnit.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
         } else {
 
             try {
@@ -104,7 +104,7 @@ public class Business extends javax.swing.JInternalFrame {
         String TyTexCont = txtTyCompany.getText();
 
         if (TyTexCont.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacio porfabor llenar registro.");
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
         } else {
             try ( Connection conexion = con.get_connection()) {
                 try {
@@ -116,10 +116,10 @@ public class Business extends javax.swing.JInternalFrame {
                     ps.executeUpdate();
                     txtTyCompany.setText("");
 
-                    JOptionPane.showMessageDialog(this, "Guardado.");
+                    JOptionPane.showMessageDialog(this, "Contacto Guardado.");
                 } catch (Exception e) {
                     System.err.print(e.toString());
-                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                 }
             } catch (SQLException e) {
                 System.err.print(e.toString());
@@ -146,7 +146,7 @@ public class Business extends javax.swing.JInternalFrame {
         try {
 
             Statement leer = conexcion.createStatement();
-            ResultSet rs = leer.executeQuery("SELECT co.ID_COMPANY, tcc.CONTACT_COMPANY , cc.TEXT_CONTACT_COMPANY\n"
+            ResultSet rs = leer.executeQuery("SELECT cc.ID_CONTACT_COMPANY, tcc.CONTACT_COMPANY , cc.TEXT_CONTACT_COMPANY\n"
                     + "FROM company co JOIN contact_company cc ON cc.ID_COMPANY=co.ID_COMPANY\n"
                     + "JOIN tipe_contact_company tcc ON cc.ID_TIPE_CONTACT_COMPANY=tcc.ID_TIPE_CONTACT_COMPANY WHERE co.ID_COMPANY = " + idBu + " ");
 
@@ -176,11 +176,11 @@ public class Business extends javax.swing.JInternalFrame {
         String texContac = tlContactCompany.getValueAt(fila, 2).toString();
 
         if (texContac.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
         } else {
 
             try {
-                PreparedStatement actu = conexcion.prepareStatement("UPDATE contact_company SET TEXT_CONTACT_COMPANY =" + texContac + " WHERE ID_COMPANY = " + idBusines + "");
+                PreparedStatement actu = conexcion.prepareStatement("UPDATE contact_company SET TEXT_CONTACT_COMPANY =" + texContac + " WHERE ID_CONTACT_COMPANY = " + idBusines + "");
                 actu.executeUpdate();
                 mostrarInforContacto();
             } catch (Exception e) {
@@ -259,7 +259,7 @@ public class Business extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Tipo de Contacto a Guardar");
 
-        jLabel10.setText("Escriva la informacion ");
+        jLabel10.setText("Escriba la información de contacto");
 
         tlCompany.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tlCompany.setComponentPopupMenu(jPopupMenu1);
@@ -288,14 +288,13 @@ public class Business extends javax.swing.JInternalFrame {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTyCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 40, Short.MAX_VALUE))
+                        .addGap(0, 18, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addGap(19, 19, 19))))
+                            .addComponent(jLabel12)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,13 +310,13 @@ public class Business extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addContainerGap(10, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Empresas", jPanel1);
@@ -345,7 +344,7 @@ public class Business extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtNameBusines, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNitBusines, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(461, Short.MAX_VALUE))
+                .addContainerGap(503, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,7 +359,7 @@ public class Business extends javax.swing.JInternalFrame {
                 .addComponent(txtNitBusines, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(btGuarEmpresa)
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addContainerGap(275, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Nueva Empresa", jPanel2);
@@ -392,7 +391,7 @@ public class Business extends javax.swing.JInternalFrame {
         System.out.println("Numero id: " + idss);
 
         if (N1Em.isEmpty() || N2Em.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
         } else {
 
             System.out.println("Numero id: " + N1Em);
@@ -413,7 +412,7 @@ public class Business extends javax.swing.JInternalFrame {
                     // JOptionPane.showMessageDialog(this, "Guardado.");
                 } catch (Exception e) {
                     System.err.print(e.toString());
-                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                 }
             } catch (SQLException e) {
                 System.err.print(e.toString());
@@ -493,7 +492,7 @@ public class Business extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            System.out.println("Error , no se puede mostrar combo" + e);
+            System.out.println("Error, no se puede mostrar combo " + e);
         }
 
     }

@@ -26,7 +26,7 @@ public class Providerss extends javax.swing.JInternalFrame {
 
     conexcion con = new conexcion();
     Connection conexcion = con.get_connection();
-    
+
     public Providerss() {
         initComponents();
         cargarTypeCommrr(boxTypeCor);
@@ -64,7 +64,7 @@ public class Providerss extends javax.swing.JInternalFrame {
                 datos[3] = rs.getString(4);
                 datos[4] = rs.getString(5);
                 datos[5] = rs.getString(6);
-                
+
                 model.addRow(datos);
 
             }
@@ -86,7 +86,7 @@ public class Providerss extends javax.swing.JInternalFrame {
         String N2las = tlProveedores.getValueAt(fila, 5).toString();
 
         if (N1name.isEmpty() || N2name.isEmpty() || N3name.isEmpty() || N1las.isEmpty() || N2las.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+            JOptionPane.showMessageDialog(this, "Campos vacios por favor llenar registros.");
         } else {
 
             try {
@@ -115,7 +115,7 @@ public class Providerss extends javax.swing.JInternalFrame {
         String TyTexCont = txtTypeCpr.getText();
 
         if (TyTexCont.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacio porfabor llenar registro.");
+            JOptionPane.showMessageDialog(this, "Campos vacio por favor llenar registro.");
         } else {
             try ( Connection conexion = con.get_connection()) {
                 try {
@@ -130,7 +130,7 @@ public class Providerss extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Guardado.");
                 } catch (Exception e) {
                     System.err.print(e.toString());
-                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                 }
             } catch (SQLException e) {
                 System.err.print(e.toString());
@@ -158,7 +158,7 @@ public class Providerss extends javax.swing.JInternalFrame {
         try {
 
             Statement leer = conexcion.createStatement();
-            ResultSet rs = leer.executeQuery("SELECT pe.ID_PERSON,ty.name_type_contact, co.text_contact\n"
+            ResultSet rs = leer.executeQuery("SELECT co.ID_CONTACT,ty.name_type_contact, co.text_contact\n"
                     + "FROM  type_contact ty JOIN contact co ON ty.id_type_contact=co.id_type_contact\n"
                     + "JOIN people pe ON co.ID_PERSON=pe.ID_PERSON WHERE pe.ID_PERSON = " + idPe + " ");
 
@@ -180,24 +180,19 @@ public class Providerss extends javax.swing.JInternalFrame {
         }
 
     }
-    
-    
-    
-    
+
     public void actualizarContacto() {
         int fila = tlContacProvee.getSelectedRow();
         System.out.println(fila);
         int idPerson = Integer.parseInt(this.tlContacProvee.getValueAt(fila, 0).toString());
         String texContac = tlContacProvee.getValueAt(fila, 2).toString();
 
-
-
         if (texContac.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+            JOptionPane.showMessageDialog(this, "Campos vacios por favor llenar registros.");
         } else {
 
             try {
-                PreparedStatement actu = conexcion.prepareStatement("UPDATE contact SET text_contact =" + texContac + " WHERE ID_person = " + idPerson + "");
+                PreparedStatement actu = conexcion.prepareStatement("UPDATE contact SET text_contact =" + texContac + " WHERE ID_CONTACT = " + idPerson + "");
                 actu.executeUpdate();
                 mostrarInforContacto();
             } catch (Exception e) {
@@ -207,8 +202,6 @@ public class Providerss extends javax.swing.JInternalFrame {
         }
     }
 
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -285,7 +278,7 @@ public class Providerss extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Tipo de Contacto a Guardar");
 
-        jLabel10.setText("Escriva la informacion ");
+        jLabel10.setText("Escriba la informacion");
 
         tlProveedores.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tlProveedores.setComponentPopupMenu(jPopupMenu1);
@@ -312,14 +305,17 @@ public class Providerss extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTypeCpr, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTypeCpr, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(7, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel12))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,15 +330,14 @@ public class Providerss extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)))
         );
 
-        jTabbedPane1.addTab("Proceedores", jPanel1);
+        jTabbedPane1.addTab("Proveedores", jPanel1);
 
         jLabel2.setText("Primer Nombre");
 
@@ -350,9 +345,9 @@ public class Providerss extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Tercer Nombre");
 
-        jLabel5.setText("Primer Nombre");
+        jLabel5.setText("Primer Apellido");
 
-        jLabel6.setText("Primer Nombre");
+        jLabel6.setText("Segundo Apellido");
 
         txtNamePr3.setText("--");
         txtNamePr3.addActionListener(new java.awt.event.ActionListener() {
@@ -395,7 +390,7 @@ public class Providerss extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(95, 95, 95)
                         .addComponent(btGuardPro)))
-                .addContainerGap(686, Short.MAX_VALUE))
+                .addContainerGap(436, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,7 +417,7 @@ public class Providerss extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btGuardPro)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(312, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Nuevo Proveedor", jPanel2);
@@ -447,76 +442,74 @@ public class Providerss extends javax.swing.JInternalFrame {
 
     private void btGuardProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardProActionPerformed
         // TODO add your handling code here:
-         String N1Em = txtNamePr1.getText();
+        String N1Em = txtNamePr1.getText();
         String N2Em = txtNamePr2.getText();
         String N3Em = txtNamePr3.getText();
         String Las1Em = txtLasNamePr1.getText();
         String Las2Em = txtLasNamePr2.getText();
-        
 
         ContarPerson idid = new ContarPerson();
 
         int idss = idid.id_incre();
         System.out.println("Numero id: " + idss);
 
+        if (N1Em.isEmpty() || N2Em.isEmpty() || N3Em.isEmpty() || Las1Em.isEmpty() || Las2Em.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Campos vacios por favor llenar registros.");
+        } else {
 
-                if (N1Em.isEmpty() || N2Em.isEmpty() || N3Em.isEmpty() || Las1Em.isEmpty() || Las2Em.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
-                } else {
+            System.out.println("Numero id: " + N1Em);
+            System.out.println("Numero id: " + N2Em);
+            System.out.println("Numero id: " + N3Em);
+            System.out.println("Numero id: " + Las1Em);
+            System.out.println("Numero id: " + Las2Em);
 
-                    System.out.println("Numero id: " + N1Em);
-                    System.out.println("Numero id: " + N2Em);
-                    System.out.println("Numero id: " + N3Em);
-                    System.out.println("Numero id: " + Las1Em);
-                    System.out.println("Numero id: " + Las2Em);
+            try ( Connection conexion = con.get_connection()) {
+                try {
+                    PreparedStatement ps = null;
+                    String query = ("INSERT INTO people(NAME1,NAME2,NAME3,last_name1,last_name2)\n"
+                            + "VALUE('" + N1Em + "','" + N2Em + "','" + N3Em + "','" + Las1Em + "','" + Las2Em + "')");
 
-                    try ( Connection conexion = con.get_connection()) {
-                        try {
-                            PreparedStatement ps = null;
-                            String query = ("INSERT INTO people(NAME1,NAME2,NAME3,last_name1,last_name2)\n"
-                                    + "VALUE('" + N1Em + "','" + N2Em + "','" + N3Em + "','" + Las1Em + "','" + Las2Em + "')");
+                    ps = conexion.prepareStatement(query);
+                    ps.executeUpdate();
 
-                            ps = conexion.prepareStatement(query);
-                            ps.executeUpdate();
-
-                            // JOptionPane.showMessageDialog(this, "Guardado.");
-                        } catch (Exception e) {
-                            System.err.print(e.toString());
-                            JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
-                        }
-                    } catch (SQLException e) {
-                        System.err.print(e.toString());
-                        JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado.\nFavor comunicarse con el administrador.");
-                    }
-                    //*********
-
-                    try ( Connection conexion = con.get_connection()) {
-                        try {
-                            PreparedStatement ps = null;
-                            String query = ("INSERT INTO person_classification(id_person,id_company,id_class_Person,id_status)\n"
-                                    + "VALUE(" + idss + ",3,2,4)");
-                            ps = conexion.prepareStatement(query);
-                            ps.executeUpdate();
-
-                            showTableProduct();
-                            
-                            txtNamePr1.setText("");
-                            txtNamePr2.setText("");
-                            txtNamePr3.setText("");
-                            txtLasNamePr1.setText("");
-                            txtLasNamePr2.setText("");
-
-                            JOptionPane.showMessageDialog(this, "Guardado.");
-                        } catch (Exception e) {
-                            System.err.print(e.toString());
-                            JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
-                        }
-                    } catch (SQLException e) {
-                        System.err.print(e.toString());
-                        JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado.\nFavor comunicarse con el administrador.");
-                    }
-
+                    // JOptionPane.showMessageDialog(this, "Guardado.");
+                } catch (Exception e) {
+                    System.err.print(e.toString());
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                 }
+            } catch (SQLException e) {
+                System.err.print(e.toString());
+                JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado.\nFavor comunicarse con el administrador.");
+            }
+            //*********
+
+            try ( Connection conexion = con.get_connection()) {
+                try {
+                    PreparedStatement ps = null;
+                    String query = ("INSERT INTO person_classification(id_person,id_company,id_class_Person,id_status)\n"
+                            + "VALUE(" + idss + ",3,2,4)");
+                    ps = conexion.prepareStatement(query);
+                    ps.executeUpdate();
+
+                    showTableProduct();
+
+                    txtNamePr1.setText("");
+                    txtNamePr2.setText("");
+                    txtNamePr3.setText("");
+                    txtLasNamePr1.setText("");
+                    txtLasNamePr2.setText("");
+
+                    JOptionPane.showMessageDialog(this, "Guardado.");
+                } catch (Exception e) {
+                    System.err.print(e.toString());
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
+                }
+            } catch (SQLException e) {
+                System.err.print(e.toString());
+                JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado.\nFavor comunicarse con el administrador.");
+            }
+
+        }
     }//GEN-LAST:event_btGuardProActionPerformed
 
     private void jMenuContactProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuContactProActionPerformed
@@ -594,7 +587,7 @@ public class Providerss extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            System.out.println("Error , no se puede mostrar combo" + e);
+            System.out.println("Error, no se puede mostrar combo" + e);
         }
     }
 }

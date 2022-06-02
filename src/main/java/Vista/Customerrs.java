@@ -91,7 +91,7 @@ public class Customerrs extends javax.swing.JInternalFrame {
         String Dnit = tlClientes.getValueAt(fila, 6).toString();
 
         if (N1name.isEmpty() || N2name.isEmpty() || N3name.isEmpty() || N1las.isEmpty() || N2las.isEmpty() || Dnit.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
         } else {
 
             try {
@@ -120,7 +120,7 @@ public class Customerrs extends javax.swing.JInternalFrame {
         String TyTexCont = txtTypeCont.getText();
 
         if (TyTexCont.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacio porfabor llenar registro.");
+            JOptionPane.showMessageDialog(this, "!!!Campos vacio por favor llenar registro.");
         } else {
             try ( Connection conexion = con.get_connection()) {
                 try {
@@ -135,7 +135,7 @@ public class Customerrs extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Guardado.");
                 } catch (Exception e) {
                     System.err.print(e.toString());
-                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                 }
             } catch (SQLException e) {
                 System.err.print(e.toString());
@@ -163,9 +163,9 @@ public class Customerrs extends javax.swing.JInternalFrame {
         try {
 
             Statement leer = conexcion.createStatement();
-            ResultSet rs = leer.executeQuery("SELECT pe.ID_PERSON,ty.name_type_contact, co.text_contact\n"
-                    + "FROM  type_contact ty JOIN contact co ON ty.id_type_contact=co.id_type_contact\n"
-                    + "JOIN people pe ON co.ID_PERSON=pe.ID_PERSON WHERE pe.ID_PERSON = " + idPe + " ");
+            ResultSet rs = leer.executeQuery("SELECT co.ID_CONTACT,ty.name_type_contact, co.text_contact\n" +
+"FROM  type_contact ty JOIN contact co ON ty.id_type_contact=co.id_type_contact\n" +
+"JOIN people pe ON co.ID_PERSON=pe.ID_PERSON WHERE pe.ID_PERSON = " + idPe + " ");
 
             while (rs.next()) {
 
@@ -198,11 +198,11 @@ public class Customerrs extends javax.swing.JInternalFrame {
 
 
         if (texContac.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
         } else {
 
             try {
-                PreparedStatement actu = conexcion.prepareStatement("UPDATE contact SET text_contact =" + texContac + " WHERE ID_person = " + idPerson + "");
+                PreparedStatement actu = conexcion.prepareStatement("UPDATE contact SET text_contact =" + texContac + " WHERE ID_CONTACT = " + idPerson + "");
                 actu.executeUpdate();
                 mostrarInforContacto();
             } catch (Exception e) {
@@ -308,7 +308,7 @@ public class Customerrs extends javax.swing.JInternalFrame {
         tlContacClientes.setComponentPopupMenu(jPopupMenu2);
         jScrollPane2.setViewportView(tlContacClientes);
 
-        jLabel10.setText("Escriva la informacion ");
+        jLabel10.setText("Escriba la informacion");
 
         jLabel12.setText("Informacion de Contacto de la Persona");
 
@@ -316,6 +316,7 @@ public class Customerrs extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
@@ -325,15 +326,13 @@ public class Customerrs extends javax.swing.JInternalFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTypeCont, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(270, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addGap(0, 11, Short.MAX_VALUE))
-            .addComponent(jSeparator1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,13 +346,12 @@ public class Customerrs extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addContainerGap(11, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Clientes", jPanel1);
@@ -366,9 +364,9 @@ public class Customerrs extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Tercer Nombre");
 
-        jLabel5.setText("Primer Nombre");
+        jLabel5.setText("Primer Aplellido");
 
-        jLabel6.setText("Primer Nombre");
+        jLabel6.setText("Segundo Apellido");
 
         txtTerName.setText("--");
 
@@ -414,7 +412,7 @@ public class Customerrs extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(91, 91, 91)
                         .addComponent(btGuardarCliente)))
-                .addContainerGap(683, Short.MAX_VALUE))
+                .addContainerGap(668, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,7 +445,7 @@ public class Customerrs extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btGuardarCliente)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Nuevo Cliente ", jPanel2);
@@ -485,7 +483,7 @@ public class Customerrs extends javax.swing.JInternalFrame {
 
 
                 if (N1Em.isEmpty() || N2Em.isEmpty() || N3Em.isEmpty() || Las1Em.isEmpty() || Las2Em.isEmpty() || tNitEm.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+                    JOptionPane.showMessageDialog(this, "!!!Campos vacios porfabor llenar registros.");
                 } else {
 
                     System.out.println("Numero id: " + N1Em);
@@ -507,7 +505,7 @@ public class Customerrs extends javax.swing.JInternalFrame {
                             // JOptionPane.showMessageDialog(this, "Guardado.");
                         } catch (Exception e) {
                             System.err.print(e.toString());
-                            JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
+                            JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                         }
                     } catch (SQLException e) {
                         System.err.print(e.toString());
@@ -535,7 +533,7 @@ public class Customerrs extends javax.swing.JInternalFrame {
                             JOptionPane.showMessageDialog(this, "Guardado.");
                         } catch (Exception e) {
                             System.err.print(e.toString());
-                            JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
+                            JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                         }
                     } catch (SQLException e) {
                         System.err.print(e.toString());
@@ -623,7 +621,7 @@ public class Customerrs extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            System.out.println("Error , no se puede mostrar combo" + e);
+            System.out.println("Error, no se puede mostrar combo" + e);
         }
     }
 }

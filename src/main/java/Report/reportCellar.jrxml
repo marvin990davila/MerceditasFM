@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportCellar" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="491678b1-c228-4e53-aa85-865a5cd3286e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Date1" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Date2" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT inv.ID_INVENTORY AS 'Id Orden',inv.ID_CELLAR AS 'Id Bodega',cl.NAME_CELLAR AS 'Bodega',
+tn.NAME_TRANSACTION AS 'Transacción',inv.SET_PRODUCT AS 'No Producto' ,inv.ID_PRODUCT AS 'No Producto',
+pr.NAME_PRODUCT AS 'Producto',inv.AMOUNT AS 'Cantidad',inv.PRICE AS 'Precio',inv.TOTAL AS 'Total'
+,inv.DATE_ADMISSION AS 'Fecha',CONCAT_WS(' ',pe.NAME1,pe.name2,pe.NAME3,pe.LAST_NAME1,pe.LAST_NAME2)Persona
+FROM inventory inv inner JOIN cellar cl ON inv.ID_CELLAR=cl.ID_CELLA
+inner JOIN product pr ON inv.ID_PRODUCT=pr.ID_PRODUCT
+inner JOIN transactions tn ON inv.ID_TRANSACTION=tn.ID_TRANSACTION
+inner JOIN people pe ON inv.ID_PERSON=pe.ID_PERSON 
+WHERE inv.DATE_ADMISSION between '$P!{Date1}' AND '$P!{Date2}']]>
+	</queryString>
+	<field name="Id Orden" class="java.lang.Integer"/>
+	<field name="Id Bodega" class="java.lang.Integer"/>
+	<field name="Bodega" class="java.lang.String"/>
+	<field name="Transacción" class="java.lang.String"/>
+	<field name="No Producto" class="java.lang.Integer"/>
+	<field name="Producto" class="java.lang.String"/>
+	<field name="Cantidad" class="java.lang.Double"/>
+	<field name="Precio" class="java.lang.Double"/>
+	<field name="Total" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Fecha" class="java.sql.Date"/>
+	<field name="Persona" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="369" height="33" uuid="4373a424-9e9f-409b-9468-be3659395c7a"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[Finca Merceditas Reporte de Bodegas]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="622" y="0" width="100" height="20" uuid="7e67faa9-9a28-49f2-bfd5-027b901a9a28"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="772" y="0" width="30" height="33" uuid="9146c9b7-238a-400e-a36b-1293a697d5d8"/>
+				<imageExpression><![CDATA["C:\\Users\\mdavi\\Documents\\NetBeansProjects\\Merceditas\\src\\main\\java\\Image\\descarga (2).jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="12" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="44" height="20" uuid="e1c15a50-f78d-4255-b21c-57642da5b91e"/>
+				<text><![CDATA[Id Orden]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="44" y="0" width="50" height="20" uuid="27777fd7-08a2-469a-aaf1-99c5377b5040"/>
+				<text><![CDATA[Id Bodega]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="194" y="0" width="62" height="20" uuid="3c329137-3c90-41d3-b020-26f4874f535d"/>
+				<text><![CDATA[Transacción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="256" y="0" width="61" height="20" uuid="34a80540-d031-459f-a579-dd2713936443"/>
+				<text><![CDATA[No Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="0" width="100" height="20" uuid="da3fef39-56f2-47e8-8c83-c63ac5abbe01"/>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="0" width="46" height="20" uuid="03eb9248-9d77-46ec-a864-8940736b30d7"/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="463" y="0" width="34" height="20" uuid="b9a98768-8cab-45dd-8e22-ff4a2cde50d4"/>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="497" y="0" width="48" height="20" uuid="54473796-b750-40df-bdb0-fd54fc558ad2"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="545" y="0" width="52" height="20" uuid="8d6fbdda-1570-45ef-bb88-2ff14ac58439"/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="597" y="0" width="112" height="20" uuid="8de97cf8-5376-4d5e-8f27-1bedebe61d29"/>
+				<text><![CDATA[Persona]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="94" y="0" width="100" height="20" uuid="5e6e49e7-14d1-4b36-bd55-bbde3903674f"/>
+				<text><![CDATA[Bodega]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="44" height="20" uuid="551ba7da-546c-4d3b-a910-8477485c6861"/>
+				<textFieldExpression><![CDATA[$F{Id Orden}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="44" y="0" width="50" height="20" uuid="b60e39dd-ce12-4629-a6d2-c2943e94eb8b"/>
+				<textFieldExpression><![CDATA[$F{Id Bodega}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="0" width="100" height="20" uuid="eff0baeb-fde6-4ffb-b94e-f9d62405839f"/>
+				<textFieldExpression><![CDATA[$F{Bodega}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="256" y="0" width="61" height="20" uuid="0c85b78f-53c4-4e14-9ab2-d9877a484eb5"/>
+				<textFieldExpression><![CDATA[$F{No Producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="194" y="0" width="62" height="20" uuid="e48768c3-3e79-4de6-92d1-9fc35b322b6a"/>
+				<textFieldExpression><![CDATA[$F{Transacción}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="317" y="0" width="100" height="20" uuid="8a93b963-e495-400b-aecb-d62b3cf2349b"/>
+				<textFieldExpression><![CDATA[$F{Producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="0" width="46" height="20" uuid="532e2ceb-b82d-4653-87ee-aae4240c249a"/>
+				<textFieldExpression><![CDATA[$F{Cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="463" y="0" width="34" height="20" uuid="ccd5fdff-c6a7-47c1-9a6d-231c5dbbad26"/>
+				<textFieldExpression><![CDATA[$F{Precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="497" y="0" width="48" height="20" uuid="0f5b118c-9634-44b6-a301-a2b49db53de5"/>
+				<textFieldExpression><![CDATA[$F{Total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="545" y="0" width="52" height="20" uuid="df8759d2-198d-45c2-801c-ee346e930355"/>
+				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="597" y="0" width="112" height="20" uuid="914470e9-259f-47a3-b3c5-31b6b1de3c1f"/>
+				<textFieldExpression><![CDATA[$F{Persona}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="20" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="681" y="0" width="80" height="20" uuid="f9a2a0da-8b69-4191-bf74-5936ce4f7e5e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="762" y="0" width="40" height="20" uuid="7706d0c5-8213-4f6a-9656-7e4b3b3078f0"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="24" splitType="Stretch"/>
+	</summary>
+</jasperReport>

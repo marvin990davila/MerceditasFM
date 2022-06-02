@@ -21,25 +21,25 @@ public class Measuress extends javax.swing.JInternalFrame {
 
     conexcion con = new conexcion();
     Connection conexcion = con.get_connection();
-    
+
     public Measuress() {
         initComponents();
         showTableMeasuress();
     }
 
-    public void showTableMeasuress(){
+    public void showTableMeasuress() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Id");
         model.addColumn("Medida");
         model.addColumn("Acronimo");
         tlMeasuress.setModel(model);
-        
+
         String[] datos = new String[3];
         try {
-            
+
             Statement leer = conexcion.createStatement();
             ResultSet rs = leer.executeQuery("SELECT * FROM measure");
-            
+
             while (rs.next()) {
 
                 System.out.println(rs.getString(1));
@@ -49,19 +49,46 @@ public class Measuress extends javax.swing.JInternalFrame {
                 datos[1] = rs.getString(2);
                 datos[2] = rs.getString(3);
                 model.addRow(datos);
-        
+
             }
             tlMeasuress.setModel(model);
-            
+
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"error" + e.toString());
+            JOptionPane.showMessageDialog(null, "error" + e.toString());
         }
     }
-    
+
+    public void actualizarMeasure() {
+        int fila = tlMeasuress.getSelectedRow();
+        System.out.println(fila);
+
+        int idMeasure = Integer.parseInt(this.tlMeasuress.getValueAt(fila, 0).toString());
+        String nameMea = tlMeasuress.getValueAt(fila, 1).toString();
+        String Acrom = tlMeasuress.getValueAt(fila, 2).toString();
+
+        System.out.println("La cantidad es: " + nameMea);
+        System.out.println("El precio es : " + Acrom);
+
+        if (nameMea.isEmpty() || Acrom.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
+        } else {
+            try {
+                PreparedStatement actu = conexcion.prepareStatement("UPDATE measure SET NAME_measure ='" + nameMea + "', acronym= '" + Acrom + "' WHERE ID_measure = " + idMeasure + "");
+                actu.executeUpdate();
+                showTableMeasuress();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "error" + e.toString());
+
+            }
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        btActualiMeasu = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         tlMeasuress = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
@@ -70,6 +97,14 @@ public class Measuress extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txtAcronimo = new javax.swing.JTextField();
         btGuardarMedida = new javax.swing.JButton();
+
+        btActualiMeasu.setText("Actualisar Medida");
+        btActualiMeasu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btActualiMeasuActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(btActualiMeasu);
 
         setClosable(true);
         setIconifiable(true);
@@ -85,6 +120,7 @@ public class Measuress extends javax.swing.JInternalFrame {
 
             }
         ));
+        tlMeasuress.setComponentPopupMenu(jPopupMenu1);
         tlMeasuress.setSelectionBackground(new java.awt.Color(153, 204, 255));
         jScrollPane1.setViewportView(tlMeasuress);
 
@@ -141,20 +177,19 @@ public class Measuress extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(247, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)))
         );
 
         pack();
@@ -162,13 +197,12 @@ public class Measuress extends javax.swing.JInternalFrame {
 
     private void btGuardarMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarMedidaActionPerformed
         // TODO add your handling code here:
-        
+
         String txtMedi = txtMedida.getText();
         String txtActo = txtAcronimo.getText();
 
-        
-        if (txtMedi.isEmpty()||txtActo.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+        if (txtMedi.isEmpty() || txtActo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
         } else {
             try ( Connection conexion = con.get_connection()) {
                 try {
@@ -181,22 +215,30 @@ public class Measuress extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Guardado.");
                 } catch (Exception e) {
                     System.err.print(e.toString());
-                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                 }
             } catch (SQLException e) {
                 System.err.print(e.toString());
                 JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado.\nFavor comunicarse con el administrador.");
             }
         }
-        
+
     }//GEN-LAST:event_btGuardarMedidaActionPerformed
+
+    private void btActualiMeasuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualiMeasuActionPerformed
+        // TODO add your handling code here:
+
+        actualizarMeasure();
+    }//GEN-LAST:event_btActualiMeasuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem btActualiMeasu;
     private javax.swing.JButton btGuardarMedida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tlMeasuress;
     private javax.swing.JTextField txtAcronimo;

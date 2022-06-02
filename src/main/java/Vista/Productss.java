@@ -79,13 +79,17 @@ public class Productss extends javax.swing.JInternalFrame {
         System.out.println("La cantidad es: " + namePro);
         System.out.println("El precio es : " + idpreo);
 
-        try {
-            PreparedStatement actu = conexcion.prepareStatement("UPDATE product SET NAME_PRODUCT ='" + namePro + "', ID_MEASURE=" + idpreo + " WHERE ID_PRODUCT = " + idProduct + "");
-            actu.executeUpdate();
-            showTableProduct();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "error" + e.toString());
+        if (namePro.isEmpty() || idpreo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
+        } else {
+            try {
+                PreparedStatement actu = conexcion.prepareStatement("UPDATE product SET NAME_PRODUCT ='" + namePro + "', ID_MEASURE=" + idpreo + " WHERE ID_PRODUCT = " + idProduct + "");
+                actu.executeUpdate();
+                showTableProduct();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "error" + e.toString());
 
+            }
         }
     }
 
@@ -145,14 +149,14 @@ public class Productss extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab2", jPanel2);
+        jTabbedPane1.addTab("Productos", jPanel2);
 
         jScrollPane3.setViewportView(txtNameProduct);
 
@@ -163,7 +167,6 @@ public class Productss extends javax.swing.JInternalFrame {
             }
         });
 
-        boxMedida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar campo" }));
         boxMedida.setToolTipText("Seleccione Campo");
         boxMedida.setAutoscrolls(true);
         boxMedida.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -202,7 +205,7 @@ public class Productss extends javax.swing.JInternalFrame {
                         .addComponent(boxMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
                         .addComponent(btGuardarProduct)))
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
             .addComponent(jSeparator1)
             .addComponent(jSeparator2)
         );
@@ -222,12 +225,12 @@ public class Productss extends javax.swing.JInternalFrame {
                     .addComponent(btGuardarProduct))
                 .addGap(47, 47, 47)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addContainerGap(241, Short.MAX_VALUE))
         );
 
         boxMedida.getAccessibleContext().setAccessibleName("Seleccione Campo");
 
-        jTabbedPane1.addTab("tab1", jPanel1);
+        jTabbedPane1.addTab("Nuevo Producto", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -272,7 +275,7 @@ public class Productss extends javax.swing.JInternalFrame {
         
          */
         if (nameMeasure.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
         } else {
             try ( Connection conexion = con.get_connection()) {
                 try {
@@ -286,7 +289,7 @@ public class Productss extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Guardado.");
                 } catch (Exception e) {
                     System.err.print(e.toString());
-                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                 }
             } catch (SQLException e) {
                 System.err.print(e.toString());
@@ -310,7 +313,7 @@ public class Productss extends javax.swing.JInternalFrame {
 
     private void jMenuIProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuIProductActionPerformed
         // TODO add your handling code here:
-        actualizarProducto(); 
+        actualizarProducto();
     }//GEN-LAST:event_jMenuIProductActionPerformed
 
 
@@ -352,7 +355,7 @@ public class Productss extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            System.out.println("Error , no se puede mostrar combo" + e);
+            System.out.println("Error, no se puede mostrar combo" + e);
         }
     }
 }

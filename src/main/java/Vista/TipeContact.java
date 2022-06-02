@@ -67,19 +67,23 @@ public class TipeContact extends javax.swing.JInternalFrame {
 
         System.out.println("La cantidad es: " + TipoContac);
 
-        try {
-            PreparedStatement actu = conexcion.prepareStatement("UPDATE type_contact SET NAME_TYPE_CONTACT ='" + TipoContac + "' WHERE ID_TYPE_CONTACT = " + idTipCont + "");
-            actu.executeUpdate();
-            showTableTipeContact();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "error" + e.toString());
+        if (TipoContac.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
+        } else {
+            try {
+                PreparedStatement actu = conexcion.prepareStatement("UPDATE type_contact SET NAME_TYPE_CONTACT ='" + TipoContac + "' WHERE ID_TYPE_CONTACT = " + idTipCont + "");
+                actu.executeUpdate();
+                showTableTipeContact();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "error" + e.toString());
 
+            }
         }
     }
-    
-    /*****************************************************************/
-    
-    
+
+    /**
+     * **************************************************************
+     */
     public void showTableTipeContactCompani() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Id Tipo de Contacto Empresa");
@@ -119,18 +123,19 @@ public class TipeContact extends javax.swing.JInternalFrame {
 
         System.out.println("La cantidad es: " + TipoContac);
 
-        try {
-            PreparedStatement actu = conexcion.prepareStatement("UPDATE tipe_contact_company SET CONTACT_COMPANY ='" + TipoContac + "' WHERE ID_TIPE_CONTACT_COMPANY = " + idTipCont + "");
-            actu.executeUpdate();
-            showTableTipeContactCompani();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "error" + e.toString());
+        if (TipoContac.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
+        } else {
+            try {
+                PreparedStatement actu = conexcion.prepareStatement("UPDATE tipe_contact_company SET CONTACT_COMPANY ='" + TipoContac + "' WHERE ID_TIPE_CONTACT_COMPANY = " + idTipCont + "");
+                actu.executeUpdate();
+                showTableTipeContactCompani();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "error" + e.toString());
 
+            }
         }
     }
-    
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -192,7 +197,7 @@ public class TipeContact extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Nuebo tipo de contacto");
+        jLabel1.setText("Nuevo tipo de contacto");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -205,9 +210,9 @@ public class TipeContact extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTipoContact, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btGuarTipeContact))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btGuarTipeContact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTipoContact))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -217,9 +222,9 @@ public class TipeContact extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(txtTipoContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btGuarTipeContact)
-                .addContainerGap())
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -228,28 +233,27 @@ public class TipeContact extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 139, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addContainerGap(335, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Personas", jPanel1);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setText("Nuebo tipo de contacto");
+        jLabel2.setText("Nuevo tipo de contacto");
 
         txtTipoContactCompani.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -296,7 +300,7 @@ public class TipeContact extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -306,7 +310,7 @@ public class TipeContact extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addContainerGap(335, Short.MAX_VALUE))
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
@@ -355,7 +359,7 @@ public class TipeContact extends javax.swing.JInternalFrame {
         String TipComm = txtTipoContact.getText();
 
         if (TipComm.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
         } else {
             try ( Connection conexion = con.get_connection()) {
                 try {
@@ -367,7 +371,7 @@ public class TipeContact extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Guardado.");
                 } catch (Exception e) {
                     System.err.print(e.toString());
-                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                 }
             } catch (SQLException e) {
                 System.err.print(e.toString());
@@ -381,7 +385,7 @@ public class TipeContact extends javax.swing.JInternalFrame {
         String TipComm = txtTipoContactCompani.getText();
 
         if (TipComm.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
         } else {
             try ( Connection conexion = con.get_connection()) {
                 try {
@@ -393,7 +397,7 @@ public class TipeContact extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Guardado.");
                 } catch (Exception e) {
                     System.err.print(e.toString());
-                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                 }
             } catch (SQLException e) {
                 System.err.print(e.toString());
@@ -414,7 +418,7 @@ public class TipeContact extends javax.swing.JInternalFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         actualizarTipeContactCompani();
-        
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
 

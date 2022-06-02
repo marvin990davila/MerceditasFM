@@ -99,7 +99,7 @@ public class Employeess extends javax.swing.JInternalFrame {
         String Dnit = tlEmpleados.getValueAt(fila, 8).toString();
 
         if (DDpi.isEmpty() || N1name.isEmpty() || N2name.isEmpty() || N3name.isEmpty() || N1las.isEmpty() || N2las.isEmpty() || Dnit.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
         } else {
 
             int Mdpi = Integer.parseInt(DDpi);
@@ -124,12 +124,12 @@ public class Employeess extends javax.swing.JInternalFrame {
         String TyCon = boxTypeContact.getSelectedItem().toString();
         String[] RayTyCon = TyCon.split("-");
 
-        System.out.println("Numero Bodega salida: " + RayTyCon[0]);
+        System.out.println("Numero Contacto: " + RayTyCon[0]);
 
         String TyTexCont = txtTypeContact.getText();
 
         if (TyTexCont.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacio porfabor llenar registro.");
+            JOptionPane.showMessageDialog(this, "!!!Campos vacio por favor llenar registro.");
         } else {
             try ( Connection conexion = con.get_connection()) {
                 try {
@@ -144,7 +144,7 @@ public class Employeess extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Guardado.");
                 } catch (Exception e) {
                     System.err.print(e.toString());
-                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                 }
             } catch (SQLException e) {
                 System.err.print(e.toString());
@@ -172,7 +172,7 @@ public class Employeess extends javax.swing.JInternalFrame {
         try {
 
             Statement leer = conexcion.createStatement();
-            ResultSet rs = leer.executeQuery("SELECT pe.ID_PERSON,ty.name_type_contact, co.text_contact\n"
+            ResultSet rs = leer.executeQuery("SELECT co.ID_CONTACT,ty.name_type_contact, co.text_contact\n"
                     + "FROM  type_contact ty JOIN contact co ON ty.id_type_contact=co.id_type_contact\n"
                     + "JOIN people pe ON co.ID_PERSON=pe.ID_PERSON WHERE pe.ID_PERSON = " + idPe + " ");
 
@@ -202,11 +202,11 @@ public class Employeess extends javax.swing.JInternalFrame {
         String texContac = tlContactEmploy.getValueAt(fila, 2).toString();
 
         if (texContac.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
         } else {
 
             try {
-                PreparedStatement actu = conexcion.prepareStatement("UPDATE contact SET text_contact =" + texContac + " WHERE ID_person = " + idPerson + "");
+                PreparedStatement actu = conexcion.prepareStatement("UPDATE contact SET text_contact =" + texContac + " WHERE ID_CONTACT = " + idPerson + "");
                 actu.executeUpdate();
                 mostrarInforContacto();
             } catch (Exception e) {
@@ -222,10 +222,10 @@ public class Employeess extends javax.swing.JInternalFrame {
         System.out.println(fila);
         int idPersom = Integer.parseInt(this.tlEmpleados.getValueAt(fila, 0).toString());
         String Status = tlEmpleados.getValueAt(fila, 10).toString();
-        String cont = "Contratado" ;
-        
+        String cont = "Contratado";
+
         System.out.println(Status);
-        
+
         if (Status.equals(cont)) {
             JOptionPane.showMessageDialog(null, "Esta persona ya se encuentra Contratada");
         } else {
@@ -245,10 +245,10 @@ public class Employeess extends javax.swing.JInternalFrame {
         System.out.println(fila);
         int idPersom = Integer.parseInt(this.tlEmpleados.getValueAt(fila, 0).toString());
         String Status = tlEmpleados.getValueAt(fila, 10).toString();
-        String cont = "Suspendido" ;
-        
+        String cont = "Suspendido";
+
         System.out.println(Status);
-        
+
         if (Status.equals(cont)) {
             JOptionPane.showMessageDialog(null, "Esta persona ya se encuentra Suspendido");
         } else {
@@ -269,10 +269,10 @@ public class Employeess extends javax.swing.JInternalFrame {
         System.out.println(fila);
         int idPersom = Integer.parseInt(this.tlEmpleados.getValueAt(fila, 0).toString());
         String Status = tlEmpleados.getValueAt(fila, 10).toString();
-        String cont = "Despedido" ;
-        
+        String cont = "Despedido";
+
         System.out.println(Status);
-        
+
         if (Status.equals(cont)) {
             JOptionPane.showMessageDialog(null, "Esta persona ya se encuentra Despedido");
         } else {
@@ -408,7 +408,7 @@ public class Employeess extends javax.swing.JInternalFrame {
         tlContactEmploy.setFocusCycleRoot(true);
         jScrollPane2.setViewportView(tlContactEmploy);
 
-        jLabel10.setText("Escriva la informacion ");
+        jLabel10.setText("Escriba la informacion");
 
         jLabel11.setText("Tipo de Contacto a Guardar");
 
@@ -419,10 +419,10 @@ public class Employeess extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -434,7 +434,7 @@ public class Employeess extends javax.swing.JInternalFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTypeContact, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
             .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel1Layout.setVerticalGroup(
@@ -452,10 +452,9 @@ public class Employeess extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel12)
-                        .addGap(9, 9, 9)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Empleados", jPanel1);
@@ -468,9 +467,9 @@ public class Employeess extends javax.swing.JInternalFrame {
 
         txtTerNameEm.setText("--");
 
-        jLabel4.setText("Primer Nombre");
+        jLabel4.setText("Primer Apellido");
 
-        jLabel5.setText("Primer Nombre");
+        jLabel5.setText("Segundo Apellido");
 
         jDateBirthdayEm.setDateFormatString("yyyy-MM-dd");
 
@@ -534,7 +533,7 @@ public class Employeess extends javax.swing.JInternalFrame {
                         .addComponent(jDateContraEm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(76, 76, 76)
                         .addComponent(btNewEmploy)))
-                .addContainerGap(612, Short.MAX_VALUE))
+                .addContainerGap(492, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -580,7 +579,7 @@ public class Employeess extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jDateContraEm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel9)))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Nuevo Empleado", jPanel2);
@@ -595,10 +594,7 @@ public class Employeess extends javax.swing.JInternalFrame {
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+            .addComponent(jTabbedPane1)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -637,7 +633,7 @@ public class Employeess extends javax.swing.JInternalFrame {
             if (jDateContraEm.getCalendar() != null) {
 
                 if (tDpi.isEmpty() || N1Em.isEmpty() || N2Em.isEmpty() || N3Em.isEmpty() || Las1Em.isEmpty() || Las2Em.isEmpty() || tNitEm.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+                    JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
                 } else {
 
                     int Mdpi = Integer.parseInt(tDpi);
@@ -663,7 +659,7 @@ public class Employeess extends javax.swing.JInternalFrame {
                             // JOptionPane.showMessageDialog(this, "Guardado.");
                         } catch (Exception e) {
                             System.err.print(e.toString());
-                            JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
+                            JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                         }
                     } catch (SQLException e) {
                         System.err.print(e.toString());
@@ -691,7 +687,7 @@ public class Employeess extends javax.swing.JInternalFrame {
                             JOptionPane.showMessageDialog(this, "Guardado.");
                         } catch (Exception e) {
                             System.err.print(e.toString());
-                            JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
+                            JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                         }
                     } catch (SQLException e) {
                         System.err.print(e.toString());
@@ -700,10 +696,10 @@ public class Employeess extends javax.swing.JInternalFrame {
 
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Campos fecha vacios porfabor llenar registros.");
+                JOptionPane.showMessageDialog(this, "!!!Campos fecha vacios por favor llenar registros.");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Campos fecha vacios porfabor llenar registros.");
+            JOptionPane.showMessageDialog(this, "!!!Campos fecha vacios por favor llenar registros.");
         }
     }//GEN-LAST:event_btNewEmployActionPerformed
 
@@ -811,7 +807,7 @@ public class Employeess extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            System.out.println("Error , no se puede mostrar combo" + e);
+            System.out.println("Error, no se puede mostrar combo" + e);
         }
     }
 }

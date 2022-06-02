@@ -25,7 +25,7 @@ public class NewUssers extends javax.swing.JInternalFrame {
         String User_name = txtNewUsuario.getText();
         String Passwordss = txtNewPass.getText();
         if (User_name.equals("") || Passwordss.equals("")) {
-            JOptionPane.showMessageDialog(this, "Uno o mas campos estan vacios. Favor de llenarlos.");
+            JOptionPane.showMessageDialog(this, "!!!Uno o mas campos estan vacios. Favor de llenarlos.");
         } else {
             try ( Connection conexion = db_connect.get_connection()) {
                 try {
@@ -111,7 +111,7 @@ public class NewUssers extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Nobre del nuevo Usuario :");
+        jLabel1.setText("Nombre del nuevo Usuario :");
 
         jLabel2.setText("Password ");
 
@@ -129,7 +129,7 @@ public class NewUssers extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(btCrearUsuario)))
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +144,7 @@ public class NewUssers extends javax.swing.JInternalFrame {
                 .addComponent(txtNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(btCrearUsuario)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();

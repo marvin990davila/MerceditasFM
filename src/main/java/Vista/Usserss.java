@@ -4,8 +4,6 @@
  */
 package Vista;
 
-    
-
 import Controler.conexcion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,6 +18,7 @@ public class Usserss extends javax.swing.JInternalFrame {
 
     conexcion con = new conexcion();
     Connection conexcion = con.get_connection();
+
     /**
      * Creates new form Usserss
      */
@@ -28,21 +27,20 @@ public class Usserss extends javax.swing.JInternalFrame {
         showTableUser();
     }
 
-    
-    public void showTableUser(){
+    public void showTableUser() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Id");
         model.addColumn("Usuario");
         model.addColumn("Passwod");
         model.addColumn("Permisos");
         tbUser.setModel(model);
-        
+
         String[] datos = new String[4];
         try {
-            
+
             Statement leer = conexcion.createStatement();
             ResultSet rs = leer.executeQuery("SELECT * FROM usser");
-            
+
             while (rs.next()) {
 
                 System.out.println(rs.getString(1));
@@ -53,17 +51,15 @@ public class Usserss extends javax.swing.JInternalFrame {
                 datos[2] = rs.getString(3);
                 datos[3] = rs.getString(4);
                 model.addRow(datos);
-        
+
             }
             tbUser.setModel(model);
-            
+
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"error" + e.toString());
+            JOptionPane.showMessageDialog(null, "error" + e.toString());
         }
     }
-    
-    
-    
+
     public void ingresar() {
 
         conexcion db_connect = new conexcion();
@@ -71,7 +67,7 @@ public class Usserss extends javax.swing.JInternalFrame {
         String User_name = txtNewUsuario.getText();
         String Passwordss = txtNewPass.getText();
         if (User_name.equals("") || Passwordss.equals("")) {
-            JOptionPane.showMessageDialog(this, "Uno o mas campos estan vacios. Favor de llenarlos.");
+            JOptionPane.showMessageDialog(this, "!!!Uno o mas campos estan vacios. Favor de llenarlos.");
         } else {
             try ( Connection conexion = db_connect.get_connection()) {
                 try {
@@ -95,7 +91,7 @@ public class Usserss extends javax.swing.JInternalFrame {
         }
 
     }
-    
+
     public void actualizarUser() {
         int fila = tbUser.getSelectedRow();
         System.out.println(fila);
@@ -107,16 +103,21 @@ public class Usserss extends javax.swing.JInternalFrame {
         System.out.println("La cantidad es: " + nameUser);
         System.out.println("El precio es : " + pass);
 
-        try {
-            PreparedStatement actu = conexcion.prepareStatement("UPDATE usser SET user_name ='" + nameUser + "', passwordss='" + pass + "' WHERE ID_USER = " + idUser + "");
-            actu.executeUpdate();
-            showTableUser();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "error" + e.toString());
+        if (nameUser.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
+        } else {
 
+            try {
+                PreparedStatement actu = conexcion.prepareStatement("UPDATE usser SET user_name ='" + nameUser + "', passwordss='" + pass + "' WHERE ID_USER = " + idUser + "");
+                actu.executeUpdate();
+                showTableUser();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "error" + e.toString());
+
+            }
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -172,20 +173,20 @@ public class Usserss extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("tab1", jPanel1);
+        jTabbedPane1.addTab("Usuarios", jPanel1);
 
-        jLabel1.setText("Nobre del nuevo Usuario :");
+        jLabel1.setText("Nombre del nuevo Usuario ");
 
         jLabel2.setText("Password ");
 
@@ -230,7 +231,7 @@ public class Usserss extends javax.swing.JInternalFrame {
                         .addComponent(txtNewUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(42, 42, 42)
                 .addComponent(btCrearUsuario)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(587, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jSeparator1)
                 .addContainerGap())
@@ -249,20 +250,20 @@ public class Usserss extends javax.swing.JInternalFrame {
                     .addComponent(btCrearUsuario))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(381, Short.MAX_VALUE))
+                .addContainerGap(265, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab2", jPanel2);
+        jTabbedPane1.addTab("Nuevo Usuario", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
         );
 
         pack();
@@ -277,7 +278,7 @@ public class Usserss extends javax.swing.JInternalFrame {
 
     private void btCrearUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btCrearUsuarioMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btCrearUsuarioMouseClicked
 
     private void btCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearUsuarioActionPerformed

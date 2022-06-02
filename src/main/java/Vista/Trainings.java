@@ -120,8 +120,8 @@ public class Trainings extends javax.swing.JInternalFrame {
         System.out.println(fila);
         int idPerson = Integer.parseInt(this.tlEmployTraining.getValueAt(fila, 0).toString());
 
-         System.out.println("Numero Bodega salida: " + idPerson);
-        
+        System.out.println("Numero Bodega salida: " + idPerson);
+
         String TyCon = boxTraining.getSelectedItem().toString();
         String[] RayTyCon = TyCon.split("-");
 
@@ -140,19 +140,17 @@ public class Trainings extends javax.swing.JInternalFrame {
                     ps.executeUpdate();
                     mostrarInforContacto();
 
-                    
-
                     // JOptionPane.showMessageDialog(this, "Guardado.");
                 } catch (Exception e) {
                     System.err.print(e.toString());
-                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                 }
             } catch (SQLException e) {
                 System.err.print(e.toString());
                 JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado.\nFavor comunicarse con el administrador.");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Campos fecha vacios porfabor llenar registros.");
+            JOptionPane.showMessageDialog(this, "Campos fecha vacios por favor llenar registros.");
         }
     }
 
@@ -175,7 +173,7 @@ public class Trainings extends javax.swing.JInternalFrame {
         try {
 
             Statement leer = conexcion.createStatement();
-            ResultSet rs = leer.executeQuery("SELECT pe.ID_PERSON, tr.ID_NAME_TRAINING, nt.TEXT_TRAINING,tr.DATE_TRAINING\n"
+            ResultSet rs = leer.executeQuery("SELECT tr.ID_TRAINING,tr.ID_NAME_TRAINING, nt.TEXT_TRAINING,tr.DATE_TRAINING\n"
                     + "FROM training tr JOIN people pe ON  tr.id_person=pe.ID_PERSON\n"
                     + "JOIN name_training nt ON tr.id_name_training=nt.ID_NAME_TRAINING WHERE pe.ID_PERSON = " + idPe + " ");
 
@@ -198,8 +196,7 @@ public class Trainings extends javax.swing.JInternalFrame {
         }
 
     }
-    
-    
+
     public void actualizarTraining() {
         int fila = tlPersonTraining.getSelectedRow();
         System.out.println(fila);
@@ -207,23 +204,27 @@ public class Trainings extends javax.swing.JInternalFrame {
         int idProduct = Integer.parseInt(this.tlPersonTraining.getValueAt(fila, 0).toString());
         String idTr = tlPersonTraining.getValueAt(fila, 1).toString();
 
-        int TidT = Integer.parseInt(idTr);
-        
-        System.out.println("La cantidad es: " + idTr);
+        if (idTr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
+        } else {
 
-        try {
-            PreparedStatement actu = conexcion.prepareStatement("UPDATE training SET ID_NAME_TRAINING =" + TidT + " WHERE ID_PERSON = " + idProduct + "");
-            actu.executeUpdate();
-            mostrarInforContacto();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "error" + e.toString());
+            int TidT = Integer.parseInt(idTr);
 
+            System.out.println("La cantidad es: " + idTr);
+
+            try {
+                PreparedStatement actu = conexcion.prepareStatement("UPDATE training SET ID_NAME_TRAINING =" + TidT + " WHERE ID_TRAINING = " + idProduct + "");
+                actu.executeUpdate();
+                mostrarInforContacto();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "error" + e.toString());
+
+            }
         }
     }
-    
-    
+
     public void actualizarNewTraining() {
-        
+
         int fila = tlNewTraining.getSelectedRow();
         System.out.println(fila);
 
@@ -243,9 +244,6 @@ public class Trainings extends javax.swing.JInternalFrame {
 
         }
     }
-    
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -339,21 +337,19 @@ public class Trainings extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(boxTraining, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateTraining, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(boxTraining, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jDateTraining, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(162, Short.MAX_VALUE))
             .addComponent(jSeparator1)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,10 +364,9 @@ public class Trainings extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Capacitaciones", jPanel1);
@@ -390,7 +385,7 @@ public class Trainings extends javax.swing.JInternalFrame {
         txaDescripTrai.setRows(5);
         jScrollPane3.setViewportView(txaDescripTrai);
 
-        jButton1.setText("Guardar nueva Capacitación");
+        jButton1.setText("Guardar una Capacitación");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -428,10 +423,10 @@ public class Trainings extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -440,7 +435,7 @@ public class Trainings extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -450,9 +445,11 @@ public class Trainings extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 112, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Crear capacitación", jPanel3);
@@ -478,7 +475,7 @@ public class Trainings extends javax.swing.JInternalFrame {
         String NDes = txaDescripTrai.getText();
 
         if (tNaTra.isEmpty() || NDes.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Campos vacios porfabor llenar registros.");
+            JOptionPane.showMessageDialog(this, "!!!Campos vacios por favor llenar registros.");
         } else {
             System.out.println("Numero id: " + tNaTra);
             System.out.println("Numero id: " + NDes);
@@ -499,7 +496,7 @@ public class Trainings extends javax.swing.JInternalFrame {
                     // JOptionPane.showMessageDialog(this, "Guardado.");
                 } catch (Exception e) {
                     System.err.print(e.toString());
-                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guaredar.");
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
                 }
             } catch (SQLException e) {
                 System.err.print(e.toString());
@@ -582,7 +579,7 @@ public class Trainings extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            System.out.println("Error , no se puede mostrar combo" + e);
+            System.out.println("Error, no se puede mostrar combo" + e);
         }
     }
 }
