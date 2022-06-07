@@ -126,6 +126,7 @@ public class Providerss extends javax.swing.JInternalFrame {
                     ps = conexion.prepareStatement(query);
                     ps.executeUpdate();
                     txtTypeCpr.setText("");
+                    mostrarInforContacto();
 
                     JOptionPane.showMessageDialog(this, "Guardado.");
                 } catch (Exception e) {

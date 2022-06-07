@@ -115,6 +115,7 @@ public class Business extends javax.swing.JInternalFrame {
                     ps = conexion.prepareStatement(query);
                     ps.executeUpdate();
                     txtTyCompany.setText("");
+                    mostrarInforContacto();
 
                     JOptionPane.showMessageDialog(this, "Contacto Guardado.");
                 } catch (Exception e) {

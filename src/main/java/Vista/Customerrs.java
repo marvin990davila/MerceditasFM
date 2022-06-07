@@ -131,6 +131,7 @@ public class Customerrs extends javax.swing.JInternalFrame {
                     ps = conexion.prepareStatement(query);
                     ps.executeUpdate();
                     txtTypeCont.setText("");
+                    mostrarInforContacto();
 
                     JOptionPane.showMessageDialog(this, "Guardado.");
                 } catch (Exception e) {

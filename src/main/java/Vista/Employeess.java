@@ -140,6 +140,7 @@ public class Employeess extends javax.swing.JInternalFrame {
                     ps = conexion.prepareStatement(query);
                     ps.executeUpdate();
                     txtTypeContact.setText("");
+                    mostrarInforContacto();
 
                     JOptionPane.showMessageDialog(this, "Guardado.");
                 } catch (Exception e) {
